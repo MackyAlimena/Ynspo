@@ -1,0 +1,31 @@
+package com.example.ynspo.ui.theme
+
+import androidx.compose.ui.graphics.Color
+
+val Purple80 = Color(0xFFD0BCFF)
+val PurpleGrey80 = Color(0xFFCCC2DC)
+val Pink80 = Color(0xFFEFB8C8)
+
+val Purple40 = Color(0xFF6650a4)
+val PurpleGrey40 = Color(0xFF625b71)
+val Pink40 = Color(0xFF7D5260)
+
+// Pop ups
+val FrenchPuce80 = Color(0xFF4C1208)
+val FrenchPuce40 = Color(0xFF98521B)
+
+// Select
+val AntiqueRuby80 = Color(0xFF7B1D26)
+val AntiqueRuby40 = Color(0xFFB75C66)
+
+// BottomBar
+val SolidPink80 = Color(0xFF893449)
+val SolidPink40 = Color(0xFFB86A7E)
+
+// Background
+val ParrotPink80 = Color(0xFFCA99AB)
+val ParrotPink40 = Color(0xFFE1C2CC)
+
+// Color fonts
+val QueenPink80 = Color(0xFFE4CDDD)
+val QueenPink40 = Color(0xFFF1E3EC)
