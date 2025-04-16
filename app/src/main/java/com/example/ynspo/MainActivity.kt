@@ -3,7 +3,8 @@ package com.example.ynspo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.example.ynspo.ui.screen.home.HomeScreen
+import androidx.compose.material3.*
+import com.example.ynspo.ui.navigation.Navigation
 import com.example.ynspo.ui.theme.YnspoTheme
 
 class MainActivity : ComponentActivity() {
@@ -11,7 +12,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             YnspoTheme {
-                HomeScreen()
+                Navigation()
             }
         }
     }
