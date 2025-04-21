@@ -3,7 +3,6 @@ package com.example.ynspo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material3.*
 import com.example.ynspo.ui.navigation.Navigation
 import com.example.ynspo.ui.theme.YnspoTheme
 
