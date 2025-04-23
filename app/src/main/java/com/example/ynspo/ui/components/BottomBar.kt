@@ -9,13 +9,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.ynspo.R
-import com.example.ynspo.ui.theme.Cardinal
+import com.example.ynspo.ui.theme.BackgroundColor
 
 data class BottomNavItem(val route: String, val icon: ImageVector, val labelRes: Int)
 
 val bottomNavItems = listOf(
     BottomNavItem("home", Icons.Default.Home, R.string.home_label),
-    //BottomNavItem("boards", Icons.Default.Dashboard, R.string.boards_label),
+    BottomNavItem("boards", Icons.Default.Favorite, R.string.boards_label),
     BottomNavItem("profile", Icons.Default.Person, R.string.profile_label)
 )
 
@@ -23,7 +23,7 @@ val bottomNavItems = listOf(
 fun BottomBar(navController: NavController) {
     val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
 
-    NavigationBar(containerColor = Cardinal) {
+    NavigationBar(containerColor = BackgroundColor) {
         bottomNavItems.forEach { item ->
             NavigationBarItem(
                 selected = currentRoute == item.route,
