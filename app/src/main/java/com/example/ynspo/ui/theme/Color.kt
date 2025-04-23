@@ -40,3 +40,9 @@ val Burgundy80 = Color(0xFF7A002B)
 val Burgundy40 = Color(0xFFC15C71)
 val DeepBlush80 = Color(0xFFE77291)
 val DeepBlush40 = Color(0xFFF6B4C3)
+
+
+val DetailColor = Color(0xFFDBC4ED)
+val BackgroundColor = Color(0xFFF2E5FF)
+val SelectedColor = Color(0xFFD0C9F1)
+

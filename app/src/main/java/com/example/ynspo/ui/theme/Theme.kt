@@ -19,7 +19,21 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = AntiqueRuby80,
+
+    primary = DetailColor,
+    onPrimary = Color.White,
+    primaryContainer = DetailColor,
+
+    secondary = SelectedColor,
+    onSecondary = Color.White,
+    secondaryContainer = SelectedColor,
+
+    background = BackgroundColor,
+    surface = BackgroundColor,
+    onBackground = DetailColor,
+    onSurface = DetailColor
+
+    /*primary = AntiqueRuby80,
     onPrimary = Color.White,
     primaryContainer = AntiqueRuby40,
 
@@ -31,6 +45,7 @@ private val LightColorScheme = lightColorScheme(
     surface = QueenPink80,
     onBackground = FrenchPuce80,
     onSurface = FrenchPuce80
+            */
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -42,27 +57,12 @@ private val LightColorScheme = lightColorScheme(
     onSurface = Color(0xFF1C1B1F),
     */
 )
-
 @Composable
-fun YnspoTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
-    content: @Composable () -> Unit
-) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
-
+fun YnspoTheme(content: @Composable () -> Unit) {
     MaterialTheme(
-        colorScheme = colorScheme,
+        colorScheme = LightColorScheme,
         typography = Typography,
         content = content
     )
 }
+

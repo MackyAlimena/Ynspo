@@ -11,4 +11,8 @@
 
     <color name="deep_blush80">#E77291</color>
     <color name="deep_blush40">#F6B4C3</color>
+
+    <color name="detail_color">#DBC4ED</color>
+    <color name="background_color">#F2E5FF</color>
+    <color name="selected_color">#D0C9F1</color>
 </resources>

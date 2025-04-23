@@ -83,6 +83,7 @@ dependencies {
     kapt(libs.hilt.compiler)
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
     implementation("io.coil-kt:coil-compose:2.5.0")
+    implementation("androidx.compose.ui:ui-text-google-fonts:1.5.1")
 
 
     // Retrofit

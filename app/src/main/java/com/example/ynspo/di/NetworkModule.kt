@@ -1,7 +1,6 @@
 package com.example.ynspo.di
 
 import com.example.ynspo.data.api.UnsplashApiService
-import com.example.ynspo.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
