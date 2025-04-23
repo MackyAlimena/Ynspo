@@ -1,4 +1,4 @@
-package com.example.ynspo.model
+package com.example.ynspo.data.model
 
 data class InspirationCard(
     val imageRes: Int,

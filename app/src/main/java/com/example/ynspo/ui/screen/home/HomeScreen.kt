@@ -17,7 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ynspo.R
-import com.example.ynspo.model.InspirationCard
+import com.example.ynspo.data.model.InspirationCard
 import com.example.ynspo.ui.theme.Dimens
 import com.example.ynspo.ui.theme.RusticRed
 

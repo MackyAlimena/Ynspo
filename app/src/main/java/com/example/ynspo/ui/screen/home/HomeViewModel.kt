@@ -2,7 +2,7 @@ package com.example.ynspo.ui.screen.home
 
 import androidx.lifecycle.ViewModel
 import com.example.ynspo.R
-import com.example.ynspo.model.InspirationCard
+import com.example.ynspo.data.model.InspirationCard
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
