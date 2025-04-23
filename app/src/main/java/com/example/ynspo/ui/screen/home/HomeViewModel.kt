@@ -1,19 +1,27 @@
-package com.example.ynspo.ui.screen.home
+package com.example.ynspo.ui.home
 
 import androidx.lifecycle.ViewModel
-import com.example.ynspo.R
-import com.example.ynspo.data.model.InspirationCard
+import androidx.lifecycle.viewModelScope
+import com.example.ynspo.data.model.UnsplashPhoto
+import com.example.ynspo.data.repository.UnsplashRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
-    private val _cards = MutableStateFlow(
-        listOf(
-            InspirationCard(R.drawable.image1, "Dreamy beach"),
-            InspirationCard(R.drawable.image2, "Sunset coast"),
-            InspirationCard(R.drawable.image3, "Tropical vibes"),
-            InspirationCard(R.drawable.image4, "Island path")
-        )
-    )
-    val cards: StateFlow<List<InspirationCard>> = _cards
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    private val repository: UnsplashRepository
+) : ViewModel() {
+
+    private val _photos = MutableStateFlow<List<UnsplashPhoto>>(emptyList())
+    val photos: StateFlow<List<UnsplashPhoto>> = _photos
+
+    fun search(query: String) {
+        viewModelScope.launch {
+            val response = repository.searchPhotos(query)
+            _photos.value = response.results
+        }
+    }
 }

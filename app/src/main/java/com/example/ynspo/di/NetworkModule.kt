@@ -1,6 +1,7 @@
 package com.example.ynspo.di
 
 import com.example.ynspo.data.api.UnsplashApiService
+import com.example.ynspo.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,7 +28,7 @@ object NetworkModule {
 
         val apiKeyInterceptor = Interceptor { chain ->
             val newRequest = chain.request().newBuilder()
-                .addHeader("Authorization", "Client-ID ${BuildConfig.UNSPLASH_ACCESS_KEY}")
+                .addHeader("Authorization", "Client-ID ${"UNSPLASH_ACCESS_KEY"}")
                 .build()
             chain.proceed(newRequest)
         }

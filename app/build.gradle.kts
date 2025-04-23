@@ -81,6 +81,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    implementation("io.coil-kt:coil-compose:2.5.0")
+
 
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")

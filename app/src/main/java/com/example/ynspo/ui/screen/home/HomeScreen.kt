@@ -1,67 +1,41 @@
-package com.example.ynspo.ui.screen.home
+package com.example.ynspo.ui.home
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.ynspo.R
-import com.example.ynspo.data.model.InspirationCard
-import com.example.ynspo.ui.theme.Dimens
-import com.example.ynspo.ui.theme.RusticRed
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.rememberAsyncImagePainter
+import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.rememberAsyncImagePainter
+
 
 @Composable
-fun HomeScreen(paddingValues: PaddingValues, viewModel: HomeViewModel = viewModel()) {
-    val cards by viewModel.cards.collectAsState()
+fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
+    val photos by viewModel.photos.collectAsState()
 
-    Column(
-        modifier = Modifier
-            .padding(paddingValues)
-            .background(RusticRed)
+    LaunchedEffect(Unit) {
+        viewModel.search("crafts")
+    }
+
+    LazyColumn(
+        modifier = Modifier.fillMaxSize()
     ) {
-        Text(
-            text = stringResource(id = R.string.home_title),
-            style = MaterialTheme.typography.titleLarge,
-            modifier = Modifier.padding(Dimens.PaddingM),
-            fontSize = Dimens.TextTitle,
-            color = MaterialTheme.colorScheme.onPrimary
-        )
-
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            contentPadding = PaddingValues(Dimens.PaddingM),
-            verticalArrangement = Arrangement.spacedBy(Dimens.GridSpacing),
-            horizontalArrangement = Arrangement.spacedBy(Dimens.GridSpacing)
-        ) {
-            items(cards) { card ->
-                Column(modifier = Modifier.fillMaxWidth()) {
-                    Image(
-                        painter = painterResource(id = card.imageRes),
-                        contentDescription = card.title,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(Dimens.ImageHeightM),
-                        contentScale = ContentScale.Crop
-                    )
-                    Text(
-                        text = card.title,
-                        style = MaterialTheme.typography.bodyMedium,
-                        modifier = Modifier.padding(Dimens.PaddingS),
-                        fontSize = Dimens.TextBody
-                    )
-                }
-            }
+        items(photos) { photo ->
+            Image(
+                painter = rememberAsyncImagePainter(photo.urls.small),
+                contentDescription = photo.description,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
+                    .padding(8.dp),
+                contentScale = ContentScale.Crop
+            )
         }
     }
 }
