@@ -1,3 +1,5 @@
+package com.example.ynspo.ui.screen.home
+
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -14,9 +16,7 @@ import com.example.ynspo.ui.theme.BackgroundColor
 import com.example.ynspo.ui.theme.SelectedColor
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.ynspo.ui.home.HomeViewModel
-import coil.compose.rememberAsyncImagePainter
 import androidx.compose.foundation.Image
-
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -43,7 +43,7 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
         ) {
             items(photos.value) { photo ->
                 Card(
-                    colors = CardDefaults.cardColors(containerColor = SelectedColor),
+                    colors = CardDefaults.cardColors(),
                     elevation = CardDefaults.cardElevation(2.dp),
                     modifier = Modifier
                         .fillMaxWidth()
