@@ -10,6 +10,7 @@ import com.example.ynspo.ui.components.BottomBar
 import com.example.ynspo.ui.screen.boards.BoardsScreen
 import com.example.ynspo.ui.profile.ProfileScreen
 import com.example.ynspo.ui.screen.home.HomeScreen
+import com.example.ynspo.ui.screen.home.SearchScreen
 
 @Composable
 fun Navigation() {
@@ -19,6 +20,7 @@ fun Navigation() {
         bottomBar = {
             BottomBar(navController = navController)
         }
+
     ) { paddingValues ->
         NavHost(
             navController = navController,
@@ -27,6 +29,7 @@ fun Navigation() {
             composable("home") { HomeScreen() }
             composable("boards") { BoardsScreen(paddingValues) }
             composable("profile") { ProfileScreen() }
+            composable("search_screen") {SearchScreen()}
         }
     }
 }

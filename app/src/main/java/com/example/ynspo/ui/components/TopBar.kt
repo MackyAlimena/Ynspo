@@ -10,11 +10,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.ynspo.ui.theme.DetailColor
 import com.example.ynspo.ui.theme.BackgroundColor
 
 @Composable
-fun TopBar() {
+fun TopBar(navController: NavController) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -38,12 +39,15 @@ fun TopBar() {
             )
         }
 
-        IconButton(onClick = { /* search click */ }) {
-            Icon(
+        IconButton(onClick = { navController.navigate("search") }) {
+            Icon(Icons.Default.Search, contentDescription = "Search")
+        }
+
+        Icon(
                 imageVector = Icons.Default.Search,
                 contentDescription = "Search",
                 tint = DetailColor
             )
         }
     }
-}
+
