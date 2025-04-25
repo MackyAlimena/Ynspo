@@ -11,12 +11,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import com.example.ynspo.ui.components.HomeHeader
+import com.example.ynspo.ui.components.TopBar
 import com.example.ynspo.ui.theme.BackgroundColor
-import com.example.ynspo.ui.theme.SelectedColor
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.ynspo.ui.home.HomeViewModel
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.items
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -32,13 +34,13 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
             .background(BackgroundColor)
             .fillMaxSize()
     ) {
-        HomeHeader()
+        TopBar()
 
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
+        LazyVerticalStaggeredGrid(
+            columns = StaggeredGridCells.Fixed(2),
             contentPadding = PaddingValues(8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            verticalItemSpacing = 8.dp,
             modifier = Modifier.fillMaxSize()
         ) {
             items(photos.value) { photo ->
