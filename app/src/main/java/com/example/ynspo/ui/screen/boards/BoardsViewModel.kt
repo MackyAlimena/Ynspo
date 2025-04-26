@@ -7,6 +7,7 @@ import com.example.ynspo.data.repository.BoardsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,10 +20,16 @@ class BoardsViewModel @Inject constructor(
 
     fun addToBoard(boardId: Int, photo: UnsplashPhoto) {
         repository.addPhotoToBoard(boardId, photo)
-        _boards.value = repository.getBoards() // update state
+        _boards.value = repository.getBoards()
     }
+
 
     fun getPhotosForBoard(boardId: Int): List<UnsplashPhoto> {
         return repository.getBoardPhotos(boardId)
     }
+
+    fun getBoardById(id: Int): Board? {
+        return _boards.value.firstOrNull { it.id == id }
+    }
+
 }

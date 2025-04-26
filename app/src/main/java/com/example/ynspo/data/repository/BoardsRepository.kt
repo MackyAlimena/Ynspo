@@ -1,5 +1,7 @@
 package com.example.ynspo.data.repository
 
+import kotlin.collections.MutableList
+import kotlin.collections.mutableListOf
 import com.example.ynspo.data.model.UnsplashPhoto
 import javax.inject.Inject
 import javax.inject.Singleton
