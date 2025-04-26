@@ -14,10 +14,12 @@ import com.example.ynspo.ui.components.BottomBar
 import com.example.ynspo.ui.pin.PinDetailScreen
 import com.example.ynspo.ui.profile.ProfileScreen
 import com.example.ynspo.ui.screen.boards.BoardDetailScreen
+import androidx.compose.runtime.remember
+
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun Navigation(sharedViewModel: SharedViewModel = hiltViewModel()) {
+fun Navigation(sharedViewModel: SharedViewModel = remember { SharedViewModel() }) {
     val navController = rememberNavController()
 
     Scaffold(
