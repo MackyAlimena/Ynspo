@@ -2,23 +2,24 @@ package com.example.ynspo.ui.screen.boards
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
-import com.example.ynspo.ui.boards.BoardsViewModel
 import com.example.ynspo.ui.theme.BackgroundColor
 import com.example.ynspo.ui.theme.SelectedColor
-import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
 fun BoardsScreen(
-    boardsViewModel: BoardsViewModel = hiltViewModel()
+    navController: NavController,
+    boardsViewModel: SharedViewModel = hiltViewModel()
 ) {
     val boards = boardsViewModel.boards.collectAsState()
 
@@ -43,7 +44,12 @@ fun BoardsScreen(
                     colors = CardDefaults.cardColors(containerColor = SelectedColor),
                     shape = MaterialTheme.shapes.medium,
                     elevation = CardDefaults.cardElevation(4.dp),
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable {
+                            // Navegar a BoardDetailScreen pasando boardId
+                            navController.navigate("boardDetail/${board.id}")
+                        }
                 ) {
                     Column(
                         modifier = Modifier.padding(16.dp)
@@ -75,4 +81,3 @@ fun BoardsScreen(
         }
     }
 }
-

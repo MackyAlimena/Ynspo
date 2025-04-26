@@ -15,12 +15,12 @@ import com.example.ynspo.ui.components.FavoriteDialog
 import com.example.ynspo.ui.theme.BackgroundColor
 import com.example.ynspo.ui.boards.BoardsViewModel
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.example.ynspo.data.model.UnsplashPhoto
 
 @Composable
-fun PinDetailScreen(
-    photoUrl: String,
-    boardsViewModel: BoardsViewModel = hiltViewModel()
-) {
+fun PinDetailScreen(photo: UnsplashPhoto, navController: NavController, boardsViewModel: BoardsViewModel = hiltViewModel()) {
+
     var showDialog by remember { mutableStateOf(false) }
 
     Column(
@@ -30,7 +30,7 @@ fun PinDetailScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = rememberAsyncImagePainter(photoUrl),
+            painter = rememberAsyncImagePainter(photo),
             contentDescription = "Photo",
             modifier = Modifier
                 .fillMaxWidth()
@@ -51,7 +51,7 @@ fun PinDetailScreen(
     }
 
     if (showDialog) {
-        FavoriteDialog(photoUrl = photoUrl, boardsViewModel = boardsViewModel) {
+        FavoriteDialog(photo = photo, boardsViewModel = boardsViewModel) {
             showDialog = false
         }
     }
