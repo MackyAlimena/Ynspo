@@ -21,7 +21,7 @@ fun BoardDetailScreen(
     boardId: Int,
     boardsViewModel: BoardsViewModel = hiltViewModel()
 ) {
-    val board = boardsViewModel.getBoardById(boardId)
+    val board = boardsViewModel.getBoardById(boardId)!!
 
     Column(
         modifier = Modifier

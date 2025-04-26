@@ -4,11 +4,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import com.example.ynspo.data.model.UnsplashPhoto
 import com.example.ynspo.ui.boards.BoardsViewModel
 
 @Composable
 fun FavoriteDialog(
-    photoUrl: String,
+    photo: UnsplashPhoto,
     boardsViewModel: BoardsViewModel,
     onDismiss: () -> Unit
 ) {
@@ -21,7 +22,7 @@ fun FavoriteDialog(
             Column {
                 boards.value.forEach { board ->
                     TextButton(onClick = {
-                        boardsViewModel.addToBoard(board.id, photoUrl)
+                        boardsViewModel.addToBoard(board.id, photo)
                         onDismiss()
                     }) {
                         Text(board.name)
@@ -36,4 +37,5 @@ fun FavoriteDialog(
         }
     )
 }
+
 
