@@ -1,7 +1,7 @@
-package com.example.ynspo.ui.screen.home
-
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.*
 import androidx.compose.material3.*
@@ -10,17 +10,17 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.ynspo.ui.components.HomeHeader
+import com.example.ynspo.ui.screen.home.HomeViewModel
 import com.example.ynspo.ui.theme.BackgroundColor
 import com.example.ynspo.ui.theme.SelectedColor
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.ynspo.ui.home.HomeViewModel
-import androidx.compose.foundation.Image
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
+fun HomeScreen(navController: NavController, viewModel: HomeViewModel = hiltViewModel()) {
     val photos = viewModel.photos.collectAsState()
 
     LaunchedEffect(Unit) {
@@ -43,11 +43,14 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
         ) {
             items(photos.value) { photo ->
                 Card(
-                    colors = CardDefaults.cardColors(),
+                    colors = CardDefaults.cardColors(containerColor = SelectedColor),
                     elevation = CardDefaults.cardElevation(2.dp),
                     modifier = Modifier
                         .fillMaxWidth()
                         .height((150..250).random().dp)
+                        .clickable {
+                            navController.navigate("pinDetail/${photo.urls.small}")
+                        }
                 ) {
                     Image(
                         painter = rememberAsyncImagePainter(model = photo.urls.small),

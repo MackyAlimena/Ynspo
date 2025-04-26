@@ -1,4 +1,4 @@
-package com.example.ynspo.ui.home
+package com.example.ynspo.ui.screen.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
