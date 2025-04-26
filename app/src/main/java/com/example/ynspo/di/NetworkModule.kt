@@ -27,7 +27,7 @@ object NetworkModule {
 
         val apiKeyInterceptor = Interceptor { chain ->
             val newRequest = chain.request().newBuilder()
-                .addHeader("Authorization", "Client-ID ${"UNSPLASH_ACCESS_KEY"}")
+                .addHeader("Authorization", "Client-ID 3dC6v56wHUbFOaEafNUBes_A3xVb3N3wtNwnNQT5OwU")
                 .build()
             chain.proceed(newRequest)
         }
