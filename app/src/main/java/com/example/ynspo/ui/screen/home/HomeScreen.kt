@@ -8,7 +8,6 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.ynspo.ui.components.HomeHeader
-import com.example.ynspo.ui.components.PinterestGrid
 import com.example.ynspo.ui.screen.home.HomeViewModel
 import com.example.ynspo.ui.theme.BackgroundColor
 

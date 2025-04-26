@@ -15,7 +15,7 @@ class ProfileViewModel : ViewModel() {
 
     private val _userProfile = MutableStateFlow(
         UserProfile(
-            name = "Macky :cherry_blossom:",
+            name = "Juan Cherry Blossom",
             photoUrl = "https://i.pravatar.cc/150?img=3",
             bio = "Lover of crafts, nature & code :computer::herb:",
             hobbies = listOf("Painting", "Knitting", "Embroidery", "Photography")

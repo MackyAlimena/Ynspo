@@ -1,5 +1,6 @@
 package com.example.ynspo.ui.pin
 
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -19,40 +20,50 @@ import androidx.navigation.NavController
 import com.example.ynspo.data.model.UnsplashPhoto
 
 @Composable
-fun PinDetailScreen(photo: UnsplashPhoto, navController: NavController, boardsViewModel: BoardsViewModel = hiltViewModel()) {
-
+fun PinDetailScreen(
+    photo: UnsplashPhoto,
+    navController: NavController,
+    boardsViewModel: BoardsViewModel = hiltViewModel()
+) {
     var showDialog by remember { mutableStateOf(false) }
 
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(BackgroundColor),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .background(BackgroundColor)
     ) {
         Image(
-            painter = rememberAsyncImagePainter(photo),
+            painter = rememberAsyncImagePainter(photo.urls.regular),
             contentDescription = "Photo",
             modifier = Modifier
                 .fillMaxWidth()
-                .height(400.dp)
-                .padding(16.dp)
+                .align(Alignment.TopCenter)
         )
 
-        Row(
+        IconButton(
+            onClick = { showDialog = true },
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 400.dp)
+                .size(56.dp)
+                .background(
+                    MaterialTheme.colorScheme.surface.copy(alpha = 0.7f),
+                    shape = CircleShape
+                )
         ) {
-            IconButton(onClick = { showDialog = true }) {
-                Icon(Icons.Default.Favorite, contentDescription = "Favorite")
+            Icon(
+                imageVector = Icons.Default.Favorite,
+                contentDescription = "Favorite",
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.size(28.dp)
+            )
+        }
+
+        if (showDialog) {
+            FavoriteDialog(photo = photo, boardsViewModel = boardsViewModel) {
+                showDialog = false
             }
         }
     }
-
-    if (showDialog) {
-        FavoriteDialog(photo = photo, boardsViewModel = boardsViewModel) {
-            showDialog = false
-        }
-    }
 }
+
