@@ -1,5 +1,6 @@
 package com.example.ynspo.ui.navigation
 
+import BoardsScreen
 import HomeScreen
 import SharedViewModel
 import androidx.compose.material3.Scaffold
@@ -11,7 +12,6 @@ import androidx.navigation.navArgument
 import com.example.ynspo.ui.components.BottomBar
 import com.example.ynspo.ui.pin.PinDetailScreen
 import com.example.ynspo.ui.screen.boards.BoardDetailScreen
-import com.example.ynspo.ui.screen.boards.BoardsScreen
 import com.example.ynspo.ui.screen.profile.ProfileScreen
 
 @Composable
@@ -31,7 +31,7 @@ fun Navigation(sharedViewModel: SharedViewModel = hiltViewModel()) {
                 HomeScreen(navController, sharedViewModel)
             }
             composable("boards") {
-                BoardsScreen(navController, sharedViewModel)
+                BoardsScreen(navController)
             }
             composable("profile") {
                 ProfileScreen(paddingValues)
