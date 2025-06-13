@@ -112,4 +112,31 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging)
 
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    kapt(libs.hilt.android.compiler)
+    implementation(libs.retrofit)Add commentMore actions
+    implementation(libs.converter.gson)
+
+    implementation(libs.androidx.datastore.preferences)
+
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    kapt(libs.androidx.room.compiler)
+
+    implementation(libs.androidx.biometric)
+
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.google.firebase.auth.ktx)
+
+    // Also add the dependencies for the Credential Manager libraries and specify their versions
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+
 }
