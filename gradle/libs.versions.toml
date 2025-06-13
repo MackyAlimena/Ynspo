@@ -15,6 +15,9 @@ retrofit = "2.9.0"
 foundationLayoutAndroid = "1.7.2"
 media3Exoplayer = "1.6.1"
 foundationAndroid = "1.7.2"
+googleServicesVersion = "4.3.15"
+firebaseAuthKtx = "23.2.0"
+lifecycleLivedataKtx = "2.9.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -42,6 +45,10 @@ retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", ver
 androidx-foundation-layout-android = { group = "androidx.compose.foundation", name = "foundation-layout-android", version.ref = "foundationLayoutAndroid" }
 androidx-media3-exoplayer = { group = "androidx.media3", name = "media3-exoplayer", version.ref = "media3Exoplayer" }
 androidx-foundation-android = { group = "androidx.compose.foundation", name = "foundation-android", version.ref = "foundationAndroid" }
+androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
+google-firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
+firebase-auth-ktx = { module = "com.google.firebase:firebase-auth-ktx" }
+google-services-v432 = { module = "com.google.gms:google-services", version.ref = "googleServicesVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
