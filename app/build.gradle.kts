@@ -139,4 +139,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
 
+    implementation("androidx.biometric:biometric:1.2.0-alpha05")
+
 }
