@@ -15,8 +15,10 @@ import com.example.ynspo.ui.screen.pins.PinDetailScreen
 import com.example.ynspo.ui.profile.ProfileScreen
 import com.example.ynspo.ui.screen.boards.BoardDetailScreen
 import androidx.compose.runtime.remember
+import android.os.Build
+import androidx.annotation.RequiresApi
 
-
+@RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Navigation(sharedViewModel: SharedViewModel = remember { SharedViewModel() }) {
