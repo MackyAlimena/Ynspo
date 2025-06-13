@@ -9,6 +9,11 @@ import androidx.fragment.app.FragmentActivity
 import com.example.ynspo.ui.navigation.Navigation
 import com.example.ynspo.ui.theme.YnspoTheme
 import dagger.hilt.android.AndroidEntryPoint
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import com.example.ynspo.notification.Notification
+
+
 
 @AndroidEntryPoint
 class MainActivity : FragmentActivity() {
@@ -17,6 +22,9 @@ class MainActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
 
         FirebaseApp.initializeApp(this)
+
+        createNotificationChannel()
+
         
         setContent {
             YnspoTheme {
@@ -24,4 +32,15 @@ class MainActivity : FragmentActivity() {
             }
         }
     }
+
+    private fun createNotificationChannel() {
+         val notificationChannel = NotificationChannel(Add commentMore actions
+            notificationChannelID,
+            "Learning Android Notification",
+            NotificationManager.IMPORTANCE_HIGH
+        )
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+
+        notificationManager.createNotificationChannel(notificationChannel)
+       }
 }
