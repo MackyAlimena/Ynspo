@@ -141,4 +141,6 @@ dependencies {
 
     implementation("androidx.biometric:biometric:1.2.0-alpha05")
 
+    implementation(libs.accompanist.permissions)
+
 }
