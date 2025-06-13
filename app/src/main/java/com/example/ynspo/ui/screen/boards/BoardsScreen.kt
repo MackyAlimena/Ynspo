@@ -14,7 +14,10 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.ynspo.ui.boards.BoardsViewModel
 import com.example.ynspo.ui.theme.BackgroundColor
+import com.example.ynspo.ui.theme.Dimens
 import com.example.ynspo.ui.theme.SelectedColor
+import java.lang.reflect.Modifier
+
 @Composable
 fun BoardsScreen(
     navController: NavController,
@@ -26,9 +29,9 @@ fun BoardsScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(BackgroundColor)
-            .padding(16.dp)
+            .padding(Dimens.PaddingL)
     ) {
-        LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        LazyColumn(verticalArrangement = Arrangement.spacedBy(Dimens.PaddingL)) {
             items(boards.value) { board ->
                 Card(
                     colors = CardDefaults.cardColors(containerColor = SelectedColor.copy(alpha = 0.3f)),
@@ -36,19 +39,19 @@ fun BoardsScreen(
                         .fillMaxWidth()
                         .clickable { navController.navigate("boardDetail/${board.id}") }
                 ) {
-                    Column(modifier = Modifier.padding(12.dp)) {
-                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Column(modifier = Modifier.padding(Dimens.PaddingM)) {
+                        Row(horizontalArrangement = Arrangement.spacedBy(Dimens.PaddingS)) {
                             board.photos.take(3).forEach { photo ->
                                 AsyncImage(
                                     model = photo.urls.small,
                                     contentDescription = null,
                                     modifier = Modifier
-                                        .size(80.dp)
+                                        .size(BoardImageSize)
                                         .clip(MaterialTheme.shapes.medium)
                                 )
                             }
                         }
-                        Spacer(modifier = Modifier.height(8.dp))
+                        Spacer(modifier = Modifier.height(PaddingS))
                         Text(board.name, style = MaterialTheme.typography.titleMedium)
                         Text("${board.photos.size} pins", style = MaterialTheme.typography.bodySmall)
                     }
