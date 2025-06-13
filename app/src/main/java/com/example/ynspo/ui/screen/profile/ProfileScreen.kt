@@ -16,6 +16,11 @@ import androidx.compose.ui.text.style.TextAlign
 import coil.compose.rememberAsyncImagePainter
 import com.example.ynspo.ui.theme.BackgroundColor
 import com.example.ynspo.ui.theme.DetailColor
+import com.example.ynspo.ui.theme.Dimens.PaddingL
+import com.example.ynspo.ui.theme.Dimens.PaddingM
+import com.example.ynspo.ui.theme.Dimens.PaddingS
+import com.example.ynspo.ui.theme.Dimens.PaddingXXS
+import com.example.ynspo.ui.theme.Dimens.ProfileImageSize
 import com.example.ynspo.ui.theme.SelectedColor
 
 @Composable
@@ -26,18 +31,18 @@ fun ProfileScreen(viewModel: ProfileViewModel = ProfileViewModel()) {
         modifier = Modifier
             .fillMaxSize()
             .background(BackgroundColor)
-            .padding(16.dp),
+            .padding(PaddingL),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
             painter = rememberAsyncImagePainter(userProfile.value.photoUrl),
-            contentDescription = "Profile Picture",
+            contentDescription = profile_image,
             modifier = Modifier
-                .size(100.dp)
+                .size(ProfileImageSize)
                 .clip(CircleShape)
         )
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(PaddingM))
 
         Text(
             text = userProfile.value.name,
@@ -46,7 +51,7 @@ fun ProfileScreen(viewModel: ProfileViewModel = ProfileViewModel()) {
             fontWeight = FontWeight.Bold
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(PaddingS))
 
         Text(
             text = userProfile.value.bio,
@@ -55,23 +60,23 @@ fun ProfileScreen(viewModel: ProfileViewModel = ProfileViewModel()) {
             textAlign = TextAlign.Center
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(PaddingL))
 
         Text(
-            text = "Hobbies",
+            text = profile_hobbies,
             style = MaterialTheme.typography.titleMedium,
             color = DetailColor,
             fontWeight = FontWeight.SemiBold
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(PaddingS))
 
         userProfile.value.hobbies.forEach { hobby ->
             Text(
                 text = "• $hobby",
                 style = MaterialTheme.typography.bodyLarge,
                 color = SelectedColor,
-                modifier = Modifier.padding(vertical = 2.dp)
+                modifier = Modifier.padding(vertical = PaddingXXS)
             )
         }
     }
