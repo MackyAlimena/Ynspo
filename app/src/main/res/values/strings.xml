@@ -1,9 +1,25 @@
 <resources>
+    <!-- App Information -->
     <string name="app_name">Ynspo</string>
-    <string name="home_title">For you</string>
+    
+    <!-- Navigation Labels -->
     <string name="home_label">Home</string>
     <string name="boards_label">Boards</string>
     <string name="profile_label">Profile</string>
+    
+    <!-- Screen Titles -->
+    <string name="home_title">For you</string>
     <string name="boards_title">Board ideas</string>
     <string name="profile_title">Your profile</string>
+    
+    <!-- Profile Screen -->
+    <string name="profile_image">Your profile picture</string>
+    <string name="profile_hobbies">Hobbies</string>
+    
+    <!-- Dialog Strings -->
+    <string name="save_to_board">Save to Board</string>
+    <string name="cancel">Cancel</string>
+    
+    <!-- Fonts -->
+    <string name="font_family_poppins">Poppins</string>
 </resources>

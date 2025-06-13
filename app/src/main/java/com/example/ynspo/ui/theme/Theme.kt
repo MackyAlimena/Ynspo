@@ -57,8 +57,18 @@ private val LightColorScheme = lightColorScheme(
     onSurface = Color(0xFF1C1B1F),
     */
 )
+
+
 @Composable
-fun YnspoTheme(content: @Composable () -> Unit) {
+fun YnspoTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit)
+{
+    val colorScheme = when {
+        darkTheme -> DarkColorScheme
+        else -> LightColorScheme
+    }
+
     MaterialTheme(
         colorScheme = LightColorScheme,
         typography = Typography,
