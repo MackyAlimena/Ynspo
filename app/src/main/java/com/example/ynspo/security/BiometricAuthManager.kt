@@ -1,6 +1,6 @@
 package com.example.ynspo.security
 
-import android.content.ContextAdd commentMore actions
+import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.biometric.BiometricManager
@@ -42,8 +42,6 @@ class BiometricAuthManager @Inject constructor() {
             .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG or BiometricManager.Authenticators.DEVICE_CREDENTIAL)
             .setTitle("Biometric Authentication")
             .setSubtitle("Log in using your biometric credentials")
-            .build()
-
-        biometricPrompt.authenticate(promptInfo)
+            .build()        biometricPrompt.authenticate(promptInfo)
     }
-}Add comment
+}
