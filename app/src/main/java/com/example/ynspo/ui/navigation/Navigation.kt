@@ -12,7 +12,7 @@ import androidx.navigation.compose.*
 import androidx.navigation.navArgument
 import com.example.ynspo.ui.components.BottomBar
 import com.example.ynspo.ui.screen.pins.PinDetailScreen
-import com.example.ynspo.ui.profile.ProfileScreen
+import com.example.ynspo.ui.screen.profile.ProfileScreen
 import com.example.ynspo.ui.screen.boards.BoardDetailScreen
 import androidx.compose.runtime.remember
 
