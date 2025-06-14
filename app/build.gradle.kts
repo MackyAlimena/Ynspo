@@ -110,7 +110,11 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
     implementation(libs.okhttp)
-    implementation(libs.okhttp.logging)
-
+    implementation(libs.okhttp.logging)    
     implementation("androidx.datastore:datastore-preferences:1.1.1")
+
+    // Room
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
 }
