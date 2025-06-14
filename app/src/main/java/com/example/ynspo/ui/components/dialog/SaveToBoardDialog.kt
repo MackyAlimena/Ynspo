@@ -44,11 +44,12 @@ fun SaveToBoardDialog(
                 }
             } else {
                 LazyColumn {
-                    items(boards) { board ->
-                        BoardSelectionItem(
+                    items(boards) { board ->                        BoardSelectionItem(
                             board = board,
                             onClick = {
                                 boardsViewModel.addToBoard(board.id, photo)
+                                // Enviar notificación cuando se guarda un pin (se implementará en el ViewModel)
+                                boardsViewModel.sendSavedPinNotification(board.name, photo.description ?: "")
                                 onDismiss()
                             }
                         )
