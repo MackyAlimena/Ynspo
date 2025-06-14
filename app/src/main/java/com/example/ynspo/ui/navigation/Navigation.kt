@@ -10,6 +10,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import androidx.navigation.navArgument
+import com.example.ynspo.auth.AuthStatusViewModel
+import com.example.ynspo.ui.components.AuthenticationCheck
+import com.example.ynspo.ui.components.BiometricPromptScreen
 import com.example.ynspo.ui.components.BottomBar
 import com.example.ynspo.ui.screen.pins.PinDetailScreen
 import com.example.ynspo.ui.profile.ProfileScreen
@@ -21,7 +24,10 @@ import androidx.annotation.RequiresApi
 @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun Navigation(sharedViewModel: SharedViewModel = remember { SharedViewModel() }) {
+fun Navigation(
+    sharedViewModel: SharedViewModel = remember { SharedViewModel() },
+    authStatusViewModel: AuthStatusViewModel = hiltViewModel()
+) {
     val navController = rememberNavController()
 
     Scaffold(
@@ -35,8 +41,12 @@ fun Navigation(sharedViewModel: SharedViewModel = remember { SharedViewModel() }
         ) {
             composable("home") {
                 HomeScreen(navController, sharedViewModel)
+            }            composable("biometric_auth") {
+                BiometricPromptScreen(onSuccess = { navController.navigate("boards_content") })
+            }            composable("boards") {
+                BiometricPromptScreen(onSuccess = { navController.navigate("boards_content") })
             }
-            composable("boards") {
+            composable("boards_content") {
                 BoardsScreen(navController)
             }
             composable("profile") {
@@ -47,8 +57,7 @@ fun Navigation(sharedViewModel: SharedViewModel = remember { SharedViewModel() }
                 if (photo != null) {
                     PinDetailScreen(photo = photo, navController = navController)
                 }
-            }
-            composable("boardDetail/{boardId}",
+            }            composable("boardDetail/{boardId}",
                 arguments = listOf(navArgument("boardId") { type = NavType.IntType })
             ) { backStackEntry ->
                 val boardId = backStackEntry.arguments?.getInt("boardId") ?: 0
