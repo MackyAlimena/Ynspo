@@ -1,12 +1,16 @@
-package com.example.ynspo.ui.screen.boards
+package com.example.ynspo.ui.boards
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.example.ynspo.data.model.UnsplashPhoto
-import com.example.ynspo.data.model.Board
+import com.example.ynspo.data.repository.Board
 import com.example.ynspo.data.repository.BoardsRoomRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,10 +20,12 @@ class BoardsViewModel @Inject constructor(
 ) : ViewModel() {
 
     // Obtenemos los tableros desde el repositorio con Room
-    val boards: LiveData<List<Board>> = repository.boards    // Función para añadir una foto a un tablero
-    fun addToBoard(boardId: Long, photo: UnsplashPhoto) {
+    val boards: LiveData<List<Board>> = repository.boards
+
+    // Función para añadir una foto a un tablero
+    fun addToBoard(boardId: Int, photo: UnsplashPhoto) {
         viewModelScope.launch {
-            repository.addPhotoToBoard(boardId, photo)
+            repository.addPhotoToBoard(boardId.toLong(), photo)
         }
     }
 

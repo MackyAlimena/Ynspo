@@ -5,14 +5,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.ynspo.ui.boards.BoardsViewModel
+import com.example.ynspo.ui.screen.boards.BoardsViewModel
 import com.example.ynspo.ui.theme.BackgroundColor
 import com.example.ynspo.ui.theme.Dimens
 import com.example.ynspo.ui.theme.SelectedColor
@@ -23,7 +23,7 @@ fun BoardsScreen(
     navController: NavController,
     boardsViewModel: BoardsViewModel = hiltViewModel()
 ) {
-    val boards = boardsViewModel.boards.collectAsState()
+    val boards = boardsViewModel.boards.observeAsState(emptyList())
 
     Column(
         modifier = Modifier

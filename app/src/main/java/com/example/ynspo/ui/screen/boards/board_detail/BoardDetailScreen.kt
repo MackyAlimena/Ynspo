@@ -4,11 +4,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.ynspo.ui.boards.BoardsViewModel
+import com.example.ynspo.ui.screen.boards.BoardsViewModel
 import com.example.ynspo.ui.components.grid.PinterestGrid
 import com.example.ynspo.ui.theme.BackgroundColor
 import com.example.ynspo.ui.theme.Dimens.PaddingL
@@ -21,7 +22,9 @@ fun BoardDetailScreen(
     navController: NavController,
     boardsViewModel: BoardsViewModel = hiltViewModel()
 ) {
-    val board = boardsViewModel.getBoardById(boardId)
+    // Convert boardId to Long and use observeAsState for LiveData
+    val boards = boardsViewModel.boards.observeAsState(initial = emptyList())
+    val board = boards.value.find { it.id == boardId.toLong() }
 
     Column(
         modifier = Modifier
