@@ -1,25 +1,24 @@
 package com.example.ynspo.ui.navigation
 
-import BoardsScreen
-import HomeScreen
-import SharedViewModel
 import android.annotation.SuppressLint
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import androidx.navigation.navArgument
-import com.example.ynspo.auth.AuthStatusViewModel
-import com.example.ynspo.ui.components.AuthenticationCheck
-import com.example.ynspo.ui.components.BiometricPromptScreen
-import com.example.ynspo.ui.components.BottomBar
-import com.example.ynspo.ui.screen.pins.PinDetailScreen
-import com.example.ynspo.ui.profile.ProfileScreen
-import com.example.ynspo.ui.screen.boards.BoardDetailScreen
-import androidx.compose.runtime.remember
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.example.ynspo.auth.AuthStatusViewModel
+import com.example.ynspo.ui.components.BiometricPromptScreen
+import com.example.ynspo.ui.components.BottomBar
+import com.example.ynspo.ui.components.SharedViewModel
+import com.example.ynspo.ui.screen.boards.BoardsScreen
+import com.example.ynspo.ui.screen.boards.board_detail.BoardDetailScreen
+import com.example.ynspo.ui.screen.home.HomeScreen
+import com.example.ynspo.ui.screen.pins.PinDetailScreen
+import com.example.ynspo.ui.screen.profile.ProfileScreen
 
 @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -41,9 +40,11 @@ fun Navigation(
         ) {
             composable("home") {
                 HomeScreen(navController, sharedViewModel)
-            }            composable("biometric_auth") {
+            }
+            composable("biometric_auth") {
                 BiometricPromptScreen(onSuccess = { navController.navigate("boards_content") })
-            }            composable("boards") {
+            }
+            composable("boards") {
                 // La ruta boards ahora muestra la autenticación biométrica primero
                 BiometricPromptScreen(
                     onSuccess = { 
@@ -66,7 +67,8 @@ fun Navigation(
                 if (photo != null) {
                     PinDetailScreen(photo = photo, navController = navController)
                 }
-            }            composable("boardDetail/{boardId}",
+            }
+            composable("boardDetail/{boardId}",
                 arguments = listOf(navArgument("boardId") { type = NavType.IntType })
             ) { backStackEntry ->
                 val boardId = backStackEntry.arguments?.getInt("boardId") ?: 0
