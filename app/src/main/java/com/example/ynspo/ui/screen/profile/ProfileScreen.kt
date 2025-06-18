@@ -1,4 +1,4 @@
-package com.example.ynspo.ui.profile
+package com.example.ynspo.ui.screen.profile
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -10,17 +10,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import coil.compose.rememberAsyncImagePainter
+import com.example.ynspo.R
 import com.example.ynspo.ui.theme.BackgroundColor
 import com.example.ynspo.ui.theme.DetailColor
-import com.example.ynspo.ui.theme.Dimens.PaddingL
-import com.example.ynspo.ui.theme.Dimens.PaddingM
-import com.example.ynspo.ui.theme.Dimens.PaddingS
-import com.example.ynspo.ui.theme.Dimens.PaddingXXS
-import com.example.ynspo.ui.theme.Dimens.ProfileImageSize
+import com.example.ynspo.ui.theme.Dimens
 import com.example.ynspo.ui.theme.SelectedColor
 
 @Composable
@@ -31,18 +29,18 @@ fun ProfileScreen(viewModel: ProfileViewModel = ProfileViewModel()) {
         modifier = Modifier
             .fillMaxSize()
             .background(BackgroundColor)
-            .padding(PaddingL),
+            .padding(Dimens.PaddingL),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
             painter = rememberAsyncImagePainter(userProfile.value.photoUrl),
-            contentDescription = profile_image,
+            contentDescription = stringResource(R.string.profile_image),
             modifier = Modifier
-                .size(ProfileImageSize)
+                .size(Dimens.ProfileImageSize)
                 .clip(CircleShape)
         )
 
-        Spacer(modifier = Modifier.height(PaddingM))
+        Spacer(modifier = Modifier.height(Dimens.PaddingM))
 
         Text(
             text = userProfile.value.name,
@@ -51,7 +49,7 @@ fun ProfileScreen(viewModel: ProfileViewModel = ProfileViewModel()) {
             fontWeight = FontWeight.Bold
         )
 
-        Spacer(modifier = Modifier.height(PaddingS))
+        Spacer(modifier = Modifier.height(Dimens.PaddingS))
 
         Text(
             text = userProfile.value.bio,
@@ -60,23 +58,23 @@ fun ProfileScreen(viewModel: ProfileViewModel = ProfileViewModel()) {
             textAlign = TextAlign.Center
         )
 
-        Spacer(modifier = Modifier.height(PaddingL))
+        Spacer(modifier = Modifier.height(Dimens.PaddingL))
 
         Text(
-            text = profile_hobbies,
+            text = stringResource(R.string.profile_hobbies),
             style = MaterialTheme.typography.titleMedium,
             color = DetailColor,
             fontWeight = FontWeight.SemiBold
         )
 
-        Spacer(modifier = Modifier.height(PaddingS))
+        Spacer(modifier = Modifier.height(Dimens.PaddingS))
 
         userProfile.value.hobbies.forEach { hobby ->
             Text(
                 text = "• $hobby",
                 style = MaterialTheme.typography.bodyLarge,
                 color = SelectedColor,
-                modifier = Modifier.padding(vertical = PaddingXXS)
+                modifier = Modifier.padding(vertical = Dimens.PaddingXXS)
             )
         }
     }
