@@ -20,7 +20,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.ynspo.R
 import com.example.ynspo.data.model.UnsplashPhoto
 import com.example.ynspo.data.model.UnsplashPhotoUrls
-import com.example.ynspo.ui.components.dialog.SaveToBoardDialog
+import com.example.ynspo.ui.components.dialog.AuthenticatedSaveToBoardDialog
 import com.example.ynspo.ui.theme.BackgroundColor
 import com.example.ynspo.ui.theme.DetailColor
 import com.example.ynspo.ui.theme.Dimens
