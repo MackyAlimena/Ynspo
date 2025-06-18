@@ -8,11 +8,12 @@ import androidx.activity.compose.setContent
 import androidx.fragment.app.FragmentActivity
 import com.example.ynspo.ui.navigation.Navigation
 import com.example.ynspo.ui.theme.YnspoTheme
+import com.google.firebase.FirebaseApp
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : FragmentActivity() {
-    @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

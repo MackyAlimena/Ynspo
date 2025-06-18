@@ -22,4 +22,7 @@
     
     <!-- Fonts -->
     <string name="font_family_poppins">Poppins</string>
+    
+    <!-- Google Sign In -->
+    <string name="google_server_id">your-google-server-id-here</string>
 </resources>
