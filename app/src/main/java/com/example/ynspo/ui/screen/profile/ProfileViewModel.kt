@@ -1,4 +1,4 @@
-package com.example.ynspo.ui.profile
+package com.example.ynspo.ui.screen.profile
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

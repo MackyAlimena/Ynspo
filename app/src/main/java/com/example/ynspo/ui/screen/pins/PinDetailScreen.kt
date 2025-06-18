@@ -15,7 +15,7 @@ import androidx.navigation.NavController
 import com.example.ynspo.data.model.UnsplashPhoto
 import com.example.ynspo.notification.ScheduleNotificationViewModel
 import com.example.ynspo.ui.boards.BoardsViewModel
-import com.example.ynspo.ui.components.dialog.SaveToBoardDialog
+import com.example.ynspo.ui.components.dialog.AuthenticatedSaveToBoardDialog
 import com.example.ynspo.ui.theme.BackgroundColor
 import com.example.ynspo.ui.theme.DetailColor
 import com.example.ynspo.ui.theme.Dimens
@@ -55,10 +55,9 @@ fun PinDetailScreen(
             modifier = Modifier.padding(horizontal = Dimens.PaddingL)
         )
     }
-    
-    // Save to board dialog
+      // Save to board dialog
     if (showSaveToBoardDialog) {
-        SaveToBoardDialog(
+        AuthenticatedSaveToBoardDialog(
             photo = photo,
             boardsViewModel = boardsViewModel,
             onDismiss = { showSaveToBoardDialog = false }
