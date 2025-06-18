@@ -1,15 +1,14 @@
 <resources>
     <!-- App Information -->
     <string name="app_name">Ynspo</string>
-    
-    <!-- Navigation Labels -->
+      <!-- Navigation Labels -->
     <string name="home_label">Home</string>
     <string name="boards_label">Boards</string>
-    <string name="profile_label">Profile</string>
-    
-    <!-- Screen Titles -->
+    <string name="notifications_label">Notific.</string>
+    <string name="profile_label">Profile</string>    <!-- Screen Titles -->
     <string name="home_title">For you</string>
     <string name="boards_title">Board ideas</string>
+    <string name="notifications_title">Notificaciones</string>
     <string name="profile_title">Your profile</string>
     
     <!-- Profile Screen -->
