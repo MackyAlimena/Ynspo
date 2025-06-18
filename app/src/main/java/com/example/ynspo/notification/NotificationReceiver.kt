@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
 import com.example.ynspo.MainActivity
-import com.example.ynspo.R
 import kotlin.random.Random
 
 const val NOTIFICATION_CHANNEL_ID = "ynspo_notification_channel"
@@ -30,7 +29,7 @@ class NotificationReceiver : BroadcastReceiver() {
         val notification = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
             .setContentTitle(title)
             .setContentText(message)
-            .setSmallIcon(R.drawable.ic_launcher_foreground) // Usa un icono adecuado
+            .setSmallIcon(android.R.drawable.ic_dialog_info) // Usa un icono del sistema
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
