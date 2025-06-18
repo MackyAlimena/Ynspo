@@ -1,3 +1,5 @@
+package com.example.ynspo.ui.screen.boards
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -16,7 +18,6 @@ import com.example.ynspo.ui.screen.boards.BoardsViewModel
 import com.example.ynspo.ui.theme.BackgroundColor
 import com.example.ynspo.ui.theme.Dimens
 import com.example.ynspo.ui.theme.SelectedColor
-import java.lang.reflect.Modifier
 
 @Composable
 fun BoardsScreen(
@@ -46,12 +47,12 @@ fun BoardsScreen(
                                     model = photo.urls.small,
                                     contentDescription = null,
                                     modifier = Modifier
-                                        .size(BoardImageSize)
+                                        .size(Dimens.BaordImageSize)
                                         .clip(MaterialTheme.shapes.medium)
                                 )
                             }
                         }
-                        Spacer(modifier = Modifier.height(PaddingS))
+                        Spacer(modifier = Modifier.height(Dimens.PaddingS))
                         Text(board.name, style = MaterialTheme.typography.titleMedium)
                         Text("${board.photos.size} pins", style = MaterialTheme.typography.bodySmall)
                     }

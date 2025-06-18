@@ -16,6 +16,7 @@ data class BottomNavItem(val route: String, val icon: ImageVector, val labelRes:
 val bottomNavItems = listOf(
     BottomNavItem("home", Icons.Default.Home, R.string.home_label),
     BottomNavItem("boards", Icons.Default.Favorite, R.string.boards_label),
+    BottomNavItem("notifications", Icons.Default.Notifications, R.string.notifications_label),
     BottomNavItem("profile", Icons.Default.Person, R.string.profile_label)
 )
 

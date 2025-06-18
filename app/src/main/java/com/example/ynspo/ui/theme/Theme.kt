@@ -71,7 +71,7 @@ fun YnspoTheme(
 
     MaterialTheme(
         colorScheme = LightColorScheme,
-        typography = Typography,
+        typography = getTypography(),
         content = content
     )
 }

@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -17,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.ynspo.R
-import com.example.ynspo.ui.profile.UserProfile
+import com.example.ynspo.ui.screen.profile.UserProfile
 import com.example.ynspo.ui.theme.DetailColor
 import com.example.ynspo.ui.theme.SelectedColor
 import com.example.ynspo.ui.theme.YnspoTheme
@@ -40,7 +39,7 @@ fun ProfileHeader(
             painter = rememberAsyncImagePainter(userProfile.photoUrl),
             contentDescription = stringResource(R.string.profile_image),
             modifier = Modifier
-                .size(dimensionResource(R.dimen.profile_image_size))
+                .size(Dimens.ProfileImageSize)
                 .clip(CircleShape)
         )
 

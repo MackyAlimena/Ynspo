@@ -1,4 +1,4 @@
-package com.example.ynspo.ui.screen.boards
+package com.example.ynspo.ui.screen.boards.board_detail
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -10,11 +10,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.ynspo.ui.screen.boards.BoardsViewModel
-import com.example.ynspo.ui.components.grid.PinterestGrid
+import com.example.ynspo.ui.components.PinterestGrid
 import com.example.ynspo.ui.theme.BackgroundColor
-import com.example.ynspo.ui.theme.Dimens.PaddingL
-import com.example.ynspo.ui.theme.Dimens.PaddingM
-import java.lang.reflect.Modifier
+import com.example.ynspo.ui.theme.Dimens
 
 @Composable
 fun BoardDetailScreen(
@@ -30,14 +28,14 @@ fun BoardDetailScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(BackgroundColor)
-            .padding(PaddingL)
+            .padding(Dimens.PaddingL)
     ) {
         if (board != null) {
             Text(
                 text = board.name,
                 style = MaterialTheme.typography.headlineMedium,
                 color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.padding(bottom = PaddingL)
+                modifier = Modifier.padding(bottom = Dimens.PaddingL)
             )
         }
 

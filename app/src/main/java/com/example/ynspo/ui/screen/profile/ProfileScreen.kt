@@ -12,6 +12,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.font.FontWeight
@@ -19,13 +20,10 @@ import androidx.compose.ui.text.style.TextAlign
 import coil.compose.rememberAsyncImagePainter
 import com.example.ynspo.ui.profile.UserProfile
 import com.example.ynspo.ui.test.DatabaseTestActivity
+import com.example.ynspo.R
 import com.example.ynspo.ui.theme.BackgroundColor
 import com.example.ynspo.ui.theme.DetailColor
-import com.example.ynspo.ui.theme.Dimens.PaddingL
-import com.example.ynspo.ui.theme.Dimens.PaddingM
-import com.example.ynspo.ui.theme.Dimens.PaddingS
-import com.example.ynspo.ui.theme.Dimens.PaddingXXS
-import com.example.ynspo.ui.theme.Dimens.ProfileImageSize
+import com.example.ynspo.ui.theme.Dimens
 import com.example.ynspo.ui.theme.SelectedColor
 import androidx.hilt.navigation.compose.hiltViewModel
 
@@ -38,18 +36,18 @@ fun ProfileScreen(viewModel: ProfileViewModel = hiltViewModel()) {
         modifier = Modifier
             .fillMaxSize()
             .background(BackgroundColor)
-            .padding(PaddingL),
-        horizontalAlignment = Alignment.CenterHorizontally    ) {
-        userProfile.value?.let { profile ->
-            Image(
-                painter = rememberAsyncImagePainter(profile.photoUrl),
-                contentDescription = "Profile image", // Usando texto directo en lugar de referencia a recurso
-                modifier = Modifier
-                    .size(ProfileImageSize)
-                    .clip(CircleShape)
-            )
+            .padding(Dimens.PaddingL),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            painter = rememberAsyncImagePainter(userProfile.value.photoUrl),
+            contentDescription = stringResource(R.string.profile_image),
+            modifier = Modifier
+                .size(Dimens.ProfileImageSize)
+                .clip(CircleShape)
+        )
 
-            Spacer(modifier = Modifier.height(PaddingM))
+            Spacer(modifier = Modifier.height(Dimens.PaddingM))
 
             Text(
                 text = profile.name,
@@ -58,14 +56,14 @@ fun ProfileScreen(viewModel: ProfileViewModel = hiltViewModel()) {
                 fontWeight = FontWeight.Bold
         )
 
-        Spacer(modifier = Modifier.height(PaddingS))        Text(
+        Spacer(modifier = Modifier.height(Dimens.PaddingS))        Text(
             text = profile.bio,
             style = MaterialTheme.typography.bodyMedium,
             color = DetailColor,
             textAlign = TextAlign.Center
         )
 
-        Spacer(modifier = Modifier.height(PaddingL))
+        Spacer(modifier = Modifier.height(Dimens.PaddingL))
 
         // Statistics row
         Row(
@@ -80,25 +78,25 @@ fun ProfileScreen(viewModel: ProfileViewModel = hiltViewModel()) {
         Spacer(modifier = Modifier.height(PaddingL))
 
         Text(
-            text = "My Hobbies", // Usando texto directo en lugar de referencia a recurso
+            text = stringResource(R.string.profile_hobbies),
             style = MaterialTheme.typography.titleMedium,
             color = DetailColor,
             fontWeight = FontWeight.SemiBold
-        )        
-        
-        Spacer(modifier = Modifier.height(PaddingS))
+        )
+
+        Spacer(modifier = Modifier.height(Dimens.PaddingS))
 
         profile.hobbies.forEach { hobby ->
             Text(
                 text = "• $hobby",
                 style = MaterialTheme.typography.bodyLarge,
                 color = SelectedColor,
-                modifier = Modifier.padding(vertical = PaddingXXS)
+                modifier = Modifier.padding(vertical = Dimens.PaddingXXS)
             )
         }
-        
+
         Spacer(modifier = Modifier.height(PaddingL))
-        
+
         // Botón para acceder a la pantalla de prueba de la base de datos
         OutlinedButton(
             onClick = {
@@ -111,7 +109,7 @@ fun ProfileScreen(viewModel: ProfileViewModel = hiltViewModel()) {
             border = ButtonDefaults.outlinedButtonBorder.copy(width = 2.dp)
         ) {
             Text(
-                text = "Test Database", 
+                text = "Test Database",
                 style = MaterialTheme.typography.bodyMedium
             )
         }
