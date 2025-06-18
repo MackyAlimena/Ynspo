@@ -12,7 +12,7 @@ import com.google.firebase.FirebaseApp
 import dagger.hilt.android.AndroidEntryPoint
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import com.example.ynspo.notification.Notification
+import com.example.ynspo.notification.NOTIFICATION_CHANNEL_ID
 
 
 
@@ -35,8 +35,8 @@ class MainActivity : FragmentActivity() {
     }
 
     private fun createNotificationChannel() {
-         val notificationChannel = NotificationChannel(Add commentMore actions
-            notificationChannelID,
+         val notificationChannel = NotificationChannel(
+            NOTIFICATION_CHANNEL_ID,
             "Learning Android Notification",
             NotificationManager.IMPORTANCE_HIGH
         )
