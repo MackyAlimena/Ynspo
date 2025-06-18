@@ -44,7 +44,16 @@ fun Navigation(
             }            composable("biometric_auth") {
                 BiometricPromptScreen(onSuccess = { navController.navigate("boards_content") })
             }            composable("boards") {
-                BiometricPromptScreen(onSuccess = { navController.navigate("boards_content") })
+                // La ruta boards ahora muestra la autenticación biométrica primero
+                BiometricPromptScreen(
+                    onSuccess = { 
+                        // Después de autenticación exitosa, navegar al contenido real
+                        navController.navigate("boards_content") {
+                            // Limpiar la pila para que el usuario no pueda volver a la pantalla de autenticación
+                            popUpTo("boards") { inclusive = true }
+                        }
+                    }
+                )
             }
             composable("boards_content") {
                 BoardsScreen(navController)
@@ -61,7 +70,19 @@ fun Navigation(
                 arguments = listOf(navArgument("boardId") { type = NavType.IntType })
             ) { backStackEntry ->
                 val boardId = backStackEntry.arguments?.getInt("boardId") ?: 0
-                BoardDetailScreen(boardId = boardId, navController = navController)
+                // Solo muestra los detalles del tablero si viene de la ruta boards_content
+                // De lo contrario, redirige a la autenticación biométrica primero
+                if (navController.previousBackStackEntry?.destination?.route?.contains("boards_content") == true) {
+                    BoardDetailScreen(boardId = boardId, navController = navController)
+                } else {
+                    BiometricPromptScreen(
+                        onSuccess = {
+                            // Después de autenticación exitosa, mostrar el detalle del tablero
+                            navController.popBackStack()
+                            navController.navigate("boardDetail/$boardId")
+                        }
+                    )
+                }
             }
         }
     }
