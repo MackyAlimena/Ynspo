@@ -26,16 +26,17 @@ class AuthViewModel @Inject constructor(
     fun authenticate(context: Context) {
         biometricAuthManager.authenticate(
             context,
-            onError = {
+            onError = { errorMessage ->
                 _isAuthenticated.value = false
-                Toast.makeText(context, "There was an error in the authentication", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
             },
             onSuccess = {
                 _isAuthenticated.value = true
+                Toast.makeText(context, "Autenticación exitosa", Toast.LENGTH_SHORT).show()
             },
             onFail = {
                 _isAuthenticated.value = false
-                Toast.makeText(context, "The authentication failed, try again", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Autenticación fallida, intenta de nuevo", Toast.LENGTH_SHORT).show()
             }
         )
     }
