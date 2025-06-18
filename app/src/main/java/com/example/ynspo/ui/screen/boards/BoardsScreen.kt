@@ -1,3 +1,5 @@
+package com.example.ynspo.ui.screen.boards
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -6,8 +8,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.ynspo.auth.AuthStatusViewModel
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
@@ -18,7 +18,6 @@ import com.example.ynspo.ui.boards.BoardsViewModel
 import com.example.ynspo.ui.theme.BackgroundColor
 import com.example.ynspo.ui.theme.Dimens
 import com.example.ynspo.ui.theme.SelectedColor
-import java.lang.reflect.Modifier
 
 @Composable
 fun BoardsScreen(
@@ -48,12 +47,12 @@ fun BoardsScreen(
                                     model = photo.urls.small,
                                     contentDescription = null,
                                     modifier = Modifier
-                                        .size(BoardImageSize)
+                                        .size(Dimens.BaordImageSize)
                                         .clip(MaterialTheme.shapes.medium)
                                 )
                             }
                         }
-                        Spacer(modifier = Modifier.height(PaddingS))
+                        Spacer(modifier = Modifier.height(Dimens.PaddingS))
                         Text(board.name, style = MaterialTheme.typography.titleMedium)
                         Text("${board.photos.size} pins", style = MaterialTheme.typography.bodySmall)
                     }
