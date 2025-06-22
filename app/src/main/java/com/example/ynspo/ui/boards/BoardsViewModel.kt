@@ -6,7 +6,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.example.ynspo.data.model.UnsplashPhoto
-import com.example.ynspo.data.repository.Board
+import com.example.ynspo.data.model.Board
 import com.example.ynspo.data.repository.BoardsRoomRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
