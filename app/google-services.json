@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "1011996403910",
+    "project_id": "ynspo-16002",
+    "storage_bucket": "ynspo-16002.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1011996403910:android:37bce28fe1362a87eb4fc7",
+        "android_client_info": {
+          "package_name": "com.example.ynspo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1011996403910-h0jjpe39vcegdjrdtmmp9m1vodjrm3kc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ynspo",
+            "certificate_hash": "d89a4f4c943c53b2b663a153cd9bf1597a2b8c0e"
+          }
+        },
+        {
+          "client_id": "1011996403910-m6s3cim9ujob9bcg10te8rogspdu0lch.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ynspo",
+            "certificate_hash": "969fbcec5718c0eb5a4479003fcce208991ca372"
+          }
+        },
+        {
+          "client_id": "1011996403910-pmjcqp2ppg6cms6hrks92dmkelqtirk9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ynspo",
+            "certificate_hash": "6281f7d143cf8f33a7eab8a159ae17e60400591d"
+          }
+        },
+        {
+          "client_id": "1011996403910-ngcrfuotfa8md5d7p0tb3dumn8fsljj3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjP0OcZR0RUNf--4LLy9Io5vHG8PXfyGs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1011996403910-ngcrfuotfa8md5d7p0tb3dumn8fsljj3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
