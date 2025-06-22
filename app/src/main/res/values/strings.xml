@@ -1,15 +1,14 @@
 <resources>
     <!-- App Information -->
     <string name="app_name">Ynspo</string>
-    
-    <!-- Navigation Labels -->
+      <!-- Navigation Labels -->
     <string name="home_label">Home</string>
     <string name="boards_label">Boards</string>
-    <string name="profile_label">Profile</string>
-    
-    <!-- Screen Titles -->
+    <string name="notifications_label">Notific.</string>
+    <string name="profile_label">Profile</string>    <!-- Screen Titles -->
     <string name="home_title">For you</string>
     <string name="boards_title">Board ideas</string>
+    <string name="notifications_title">Notificaciones</string>
     <string name="profile_title">Your profile</string>
     
     <!-- Profile Screen -->
@@ -19,7 +18,15 @@
     <!-- Dialog Strings -->
     <string name="save_to_board">Save to Board</string>
     <string name="cancel">Cancel</string>
+    <string name="create_board">Create Board</string>
+    <string name="board_name">Board Name</string>
+    <string name="create_new_board">Create New Board</string>
+    <string name="board_name_hint">e.g. Home Decor Ideas</string>
+    <string name="board_name_empty_error">Board name cannot be empty</string>
     
     <!-- Fonts -->
     <string name="font_family_poppins">Poppins</string>
+    
+    <!-- Google Sign In -->
+    <string name="google_server_id">1011996403910-ngcrfuotfa8md5d7p0tb3dumn8fsljj3.apps.googleusercontent.com</string>
 </resources>
