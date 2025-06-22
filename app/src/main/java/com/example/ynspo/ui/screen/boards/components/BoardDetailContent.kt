@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import com.example.ynspo.R
 import com.example.ynspo.data.model.UnsplashPhoto
 import com.example.ynspo.data.model.UnsplashPhotoUrls
-import com.example.ynspo.data.repository.Board
+import com.example.ynspo.data.model.Board
 import com.example.ynspo.ui.components.grid.PinterestGrid
 import com.example.ynspo.ui.theme.DetailColor
 import com.example.ynspo.ui.theme.YnspoTheme
