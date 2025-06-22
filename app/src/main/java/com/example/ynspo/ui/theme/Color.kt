@@ -46,3 +46,10 @@ val DetailColor = Color(0xFFDBC4ED)
 val BackgroundColor = Color(0xFFF2E5FF)
 val SelectedColor = Color(0xFFD0C9F1)
 
+// Dark Theme Colors
+val DarkDetailColor = Color(0xFF7B4397)
+val DarkBackgroundColor = Color(0xFF1A1A2E)
+val DarkSelectedColor = Color(0xFF16213E)
+val DarkSurfaceColor = Color(0xFF0F1419)
+val DarkOnSurfaceColor = Color(0xFFE1E1E6)
+

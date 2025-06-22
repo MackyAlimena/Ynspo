@@ -13,9 +13,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = DarkDetailColor,
+    onPrimary = Color.White,
+    primaryContainer = DarkDetailColor,
+    
+    secondary = DarkSelectedColor,
+    onSecondary = DarkOnSurfaceColor,
+    secondaryContainer = DarkSelectedColor,
+    
+    background = DarkBackgroundColor,
+    surface = DarkSurfaceColor,
+    onBackground = DarkOnSurfaceColor,
+    onSurface = DarkOnSurfaceColor
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -70,8 +79,8 @@ fun YnspoTheme(
     }
 
     MaterialTheme(
-        colorScheme = LightColorScheme,
-        typography = Typography,
+        colorScheme = colorScheme,
+        typography = getTypography(),
         content = content
     )
 }
