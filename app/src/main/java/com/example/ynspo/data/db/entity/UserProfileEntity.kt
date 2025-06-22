@@ -6,10 +6,11 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "user_profile")
 data class UserProfileEntity(
-    @PrimaryKey
-    val id: String = "user_profile", 
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0,
     val name: String,
-    val photoUrl: String,
+    val photoUrl: String?,
     val bio: String,
-    val lastUpdated: Long = System.currentTimeMillis()
+    val lastUpdated: Long = System.currentTimeMillis(),
+    val darkModeEnabled: Boolean = false
 )

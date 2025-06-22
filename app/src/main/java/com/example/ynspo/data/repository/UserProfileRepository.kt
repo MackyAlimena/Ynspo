@@ -18,7 +18,7 @@ class UserProfileRepository @Inject constructor(
     private val userId = "user_profile"
 
     // Obtener el perfil de usuario
-    val userProfile: LiveData<UserProfile?> = database.userProfileDao().getUserProfile().map { profileEntity ->
+    val userProfile: LiveData<UserProfile?> = database.userProfileDao().getUserProfileLiveData().map { profileEntity ->
         profileEntity?.let { profile ->
             val hobbies = database.userProfileDao().getUserHobbies(userId).value ?: emptyList()
             UserProfileMapper.fromEntity(profile, hobbies)
