@@ -4,15 +4,21 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.ynspo.data.model.UnsplashPhoto
 import com.example.ynspo.data.model.UnsplashPhotoUrls
-import com.example.ynspo.data.repository.Board
+import com.example.ynspo.data.model.Board
 import com.example.ynspo.ui.profile.UserProfile
 import com.example.ynspo.ui.theme.BackgroundColor
+import com.example.ynspo.ui.theme.DetailColor
+import com.example.ynspo.ui.theme.SelectedColor
 import com.example.ynspo.ui.theme.YnspoTheme
 import com.example.ynspo.ui.theme.Dimens
 
