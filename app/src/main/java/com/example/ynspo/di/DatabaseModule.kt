@@ -2,6 +2,8 @@ package com.example.ynspo.di
 
 import android.content.Context
 import com.example.ynspo.data.db.YnspoDatabase
+import com.example.ynspo.data.db.dao.FirebaseUserDao
+import com.example.ynspo.data.db.dao.UserProfileDao
 import com.example.ynspo.data.repository.BoardsRoomRepository
 import com.example.ynspo.data.repository.UserProfileRepository
 import dagger.Module
@@ -31,5 +33,17 @@ object DatabaseModule {
     @Singleton
     fun provideUserProfileRepository(database: YnspoDatabase): UserProfileRepository {
         return UserProfileRepository(database)
+    }
+
+    @Provides
+    @Singleton
+    fun provideFirebaseUserDao(database: YnspoDatabase): FirebaseUserDao {
+        return database.firebaseUserDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserProfileDao(database: YnspoDatabase): UserProfileDao {
+        return database.userProfileDao()
     }
 }

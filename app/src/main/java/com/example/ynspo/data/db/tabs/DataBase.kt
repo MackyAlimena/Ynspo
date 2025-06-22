@@ -30,6 +30,8 @@ fun Database(
                 modifier = Modifier.padding(vertical = 20.dp)
             )
         }
+        // Comentado temporalmente - necesita implementación de items, ListItem y ListItemCategory
+        /*
         items(items.filter { it.category == ListItemCategory.Database }) { tab ->
             ListItem(
                 listItem = tab,
@@ -37,6 +39,7 @@ fun Database(
                 onClick(tab.title)
             }
         }
+        */
     }
 }
 

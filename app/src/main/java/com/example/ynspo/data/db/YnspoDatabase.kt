@@ -12,11 +12,13 @@ import com.example.ynspo.data.db.dao.BoardDao
 import com.example.ynspo.data.db.dao.BoardPhotoDao
 import com.example.ynspo.data.db.dao.PhotoDao
 import com.example.ynspo.data.db.dao.UserProfileDao
+import com.example.ynspo.data.db.dao.FirebaseUserDao
 import com.example.ynspo.data.db.entity.BoardEntity
 import com.example.ynspo.data.db.entity.BoardPhotosCrossRef
 import com.example.ynspo.data.db.entity.PhotoEntity
 import com.example.ynspo.data.db.entity.UserHobbyEntity
 import com.example.ynspo.data.db.entity.UserProfileEntity
+import com.example.ynspo.data.db.entity.FirebaseUserEntity
 
 @Database(
     entities = [
@@ -24,9 +26,10 @@ import com.example.ynspo.data.db.entity.UserProfileEntity
         PhotoEntity::class,
         BoardPhotosCrossRef::class,
         UserProfileEntity::class,
-        UserHobbyEntity::class
+        UserHobbyEntity::class,
+        FirebaseUserEntity::class
     ],
-    version = 1,
+    version = 3,
     exportSchema = false
 )
 abstract class YnspoDatabase : RoomDatabase() {
@@ -35,6 +38,7 @@ abstract class YnspoDatabase : RoomDatabase() {
     abstract fun photoDao(): PhotoDao
     abstract fun boardPhotoDao(): BoardPhotoDao
     abstract fun userProfileDao(): UserProfileDao
+    abstract fun firebaseUserDao(): FirebaseUserDao
 
     companion object {
         @Volatile

@@ -1,7 +1,7 @@
 package com.example.ynspo.data.db.mapper
 
 import com.example.ynspo.data.db.entity.BoardEntity
-import com.example.ynspo.data.repository.Board
+import com.example.ynspo.data.model.Board
 
 
 object BoardMapper {
