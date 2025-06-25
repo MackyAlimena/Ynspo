@@ -91,6 +91,7 @@ dependencies {
     // ViewModel and Lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
     implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation("androidx.compose.runtime:runtime-livedata:1.5.4")
     
     // Hilt
     implementation(libs.hilt.android)
@@ -128,5 +129,10 @@ dependencies {
 
     // Accompanist Permissions
     implementation("com.google.accompanist:accompanist-permissions:0.32.0")
+
+    // Room
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
 
 }
