@@ -6,10 +6,8 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Transaction
 import androidx.room.Update
 import com.example.ynspo.data.db.entity.BoardEntity
-import com.example.ynspo.data.db.entity.BoardWithPhotos
 
 @Dao
 interface BoardDao {
@@ -25,14 +23,9 @@ interface BoardDao {
     @Query("SELECT * FROM boards ORDER BY creationDate DESC")
     fun getAllBoards(): LiveData<List<BoardEntity>>
 
+    @Query("SELECT * FROM boards ORDER BY creationDate DESC")
+    suspend fun getAllBoardsSync(): List<BoardEntity>
+
     @Query("SELECT * FROM boards WHERE id = :boardId")
     suspend fun getBoardById(boardId: Long): BoardEntity?
-
-    @Transaction
-    @Query("SELECT * FROM boards ORDER BY creationDate DESC")
-    fun getAllBoardsWithPhotos(): LiveData<List<BoardWithPhotos>>
-
-    @Transaction
-    @Query("SELECT * FROM boards WHERE id = :boardId")
-    suspend fun getBoardWithPhotos(boardId: Long): BoardWithPhotos?
 }

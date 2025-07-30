@@ -28,4 +28,8 @@ interface PhotoDao {
 
     @Query("SELECT * FROM photos WHERE id = :photoId")
     suspend fun getPhotoById(photoId: String): PhotoEntity?
+
+    // Eliminar una foto específica por ID
+    @Query("DELETE FROM photos WHERE id = :photoId")
+    suspend fun deletePhotoById(photoId: String)
 }
