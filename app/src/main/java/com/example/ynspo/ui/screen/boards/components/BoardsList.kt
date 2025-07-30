@@ -10,9 +10,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.ynspo.R
+import com.example.ynspo.data.model.Board
+import com.example.ynspo.data.model.InspirationItem
 import com.example.ynspo.data.model.UnsplashPhoto
 import com.example.ynspo.data.model.UnsplashPhotoUrls
-import com.example.ynspo.data.model.Board
+import com.example.ynspo.data.model.toInspirationItem
 import com.example.ynspo.ui.components.board.BoardCard
 import com.example.ynspo.ui.theme.YnspoTheme
 import com.example.ynspo.ui.theme.Dimens
@@ -79,17 +81,17 @@ fun BoardsListPreview() {
             Board(
                 id = 1,
                 name = "Handmade Decor",
-                photos = samplePhotos.toMutableList()
+                photos = samplePhotos.map { it.toInspirationItem() }.toMutableList()
             ),
             Board(
                 id = 2,
                 name = "Knitting Ideas",
-                photos = samplePhotos.toMutableList()
+                photos = samplePhotos.map { it.toInspirationItem() }.toMutableList()
             ),
             Board(
                 id = 3,
                 name = "Summer Vibes",
-                photos = samplePhotos.toMutableList()
+                photos = samplePhotos.map { it.toInspirationItem() }.toMutableList()
             )
         )
         

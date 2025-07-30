@@ -7,7 +7,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import com.example.ynspo.data.model.Board
+import com.example.ynspo.data.model.InspirationItem
 import com.example.ynspo.data.model.UnsplashPhoto
+import com.example.ynspo.data.model.toInspirationItem
+import com.example.ynspo.data.model.toUnsplashPhoto
 import com.example.ynspo.ui.components.PinterestGrid
 import com.example.ynspo.ui.theme.Dimens
 
@@ -42,8 +45,11 @@ fun BoardDetailContent(
         // Photos grid
         if (board.photos.isNotEmpty()) {
             PinterestGrid(
-                photos = board.photos,
-                onPhotoClick = onPhotoClick,
+                inspirationItems = board.photos,
+                onItemClick = { item -> 
+                    val photo = item.toUnsplashPhoto()
+                    onPhotoClick(photo)
+                },
                 modifier = Modifier.fillMaxSize()
             )
         } else {
