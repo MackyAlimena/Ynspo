@@ -39,14 +39,18 @@ fun UploadPinScreen(
     val uploadState by uploadViewModel.state.collectAsStateWithLifecycle()
     val firebaseUser by profileViewModel.firebaseUser.collectAsStateWithLifecycle()
     val persistedUser by profileViewModel.persistedUser.observeAsState()
-    
+
     val userId = firebaseUser?.uid ?: persistedUser?.uid ?: "anonymous"
     val userName = firebaseUser?.displayName ?: persistedUser?.displayName
     val userPhotoUrl = firebaseUser?.photoUrl?.toString() ?: persistedUser?.photoUrl
-    
+
     val snackbarHostState = remember { SnackbarHostState() }
     var showSaveToBoardDialog by remember { mutableStateOf(false) }
-    
+    var hasStartedUpload by remember { mutableStateOf(false) }
+
+    // Una vez que empieza la subida, mantener isLoading true hasta que se vuelva a renderizar
+    val isLoading = uploadState.isLoading || hasStartedUpload
+
     uploadState.errorMessage?.let { error ->
         LaunchedEffect(error) {
             snackbarHostState.showSnackbar(
@@ -56,7 +60,14 @@ fun UploadPinScreen(
             uploadViewModel.clearError()
         }
     }
-    
+
+    // Marcar que empezó la subida
+    LaunchedEffect(uploadState.isLoading) {
+        if (uploadState.isLoading) {
+            hasStartedUpload = true
+        }
+    }
+
     // Mostrar éxito y diálogo cuando el upload sea exitoso Y el pin esté disponible
     if (uploadState.isSuccess && uploadState.uploadedPin != null) {
         LaunchedEffect(uploadState.uploadedPin) {
@@ -69,7 +80,7 @@ fun UploadPinScreen(
             showSaveToBoardDialog = true
         }
     }
-    
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -103,7 +114,7 @@ fun UploadPinScreen(
                 .verticalScroll(rememberScrollState())
         ) {
             Spacer(modifier = Modifier.height(Dimens.PaddingL))
-            
+
             Text(
                 text = stringResource(R.string.upload_share_inspiration),
                 style = MaterialTheme.typography.headlineMedium,
@@ -111,14 +122,14 @@ fun UploadPinScreen(
                 color = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.padding(bottom = Dimens.PaddingM)
             )
-            
+
             Text(
                 text = stringResource(R.string.upload_description),
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(bottom = Dimens.PaddingXL)
             )
-            
+
             ImageSelector(
                 imageUri = uploadState.imageUri,
                 onImageSelected = { uri ->
@@ -126,7 +137,7 @@ fun UploadPinScreen(
                 },
                 modifier = Modifier.padding(bottom = Dimens.PaddingL)
             )
-            
+
             UploadPinForm(
                 description = uploadState.description,
                 hashtags = uploadState.hashtags,
@@ -136,10 +147,10 @@ fun UploadPinScreen(
                 onKeywordsChange = { uploadViewModel.setKeywords(it) },
                 modifier = Modifier.padding(bottom = Dimens.PaddingL)
             )
-            
+
             UploadButton(
-                isLoading = uploadState.isLoading,
-                isEnabled = uploadState.imageUri != null && uploadState.description.isNotBlank(),
+                isLoading = isLoading,
+                isEnabled = uploadState.imageUri != null && uploadState.description.isNotBlank() && !isLoading,
                 onClick = {
                     uploadViewModel.uploadPin(
                         userId = userId,
@@ -153,13 +164,13 @@ fun UploadPinScreen(
             )
         }
     }
-    
+
     // Diálogo para guardar en board
     if (showSaveToBoardDialog && uploadState.uploadedPin != null) {
         SaveToBoardAfterUploadDialog(
             uploadedPin = uploadState.uploadedPin!!,
             boardsViewModel = boardsViewModel,
-            onDismiss = { 
+            onDismiss = {
                 showSaveToBoardDialog = false
                 uploadViewModel.clearSuccess()
                 navController.popBackStack()
