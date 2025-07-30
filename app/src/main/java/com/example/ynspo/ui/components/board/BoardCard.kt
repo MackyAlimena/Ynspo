@@ -14,9 +14,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.example.ynspo.data.model.Board
+import com.example.ynspo.data.model.InspirationItem
 import com.example.ynspo.data.model.UnsplashPhoto
 import com.example.ynspo.data.model.UnsplashPhotoUrls
-import com.example.ynspo.data.model.Board
+import com.example.ynspo.data.model.toInspirationItem
 import com.example.ynspo.ui.theme.Dimens
 import com.example.ynspo.ui.theme.YnspoTheme
 
@@ -98,7 +100,7 @@ fun BoardCard(
                 Spacer(modifier = Modifier.height(Dimens.PaddingXS))
                 
                 Text(
-                    text = "${board.photos.size} fotos",
+                    text = "Board de inspiración",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f)
                 )
@@ -134,7 +136,7 @@ fun BoardCardPreview() {
                     regular = "https://images.unsplash.com/photo-1523567830207-96731740fa71?w=400",
                     full = "https://images.unsplash.com/photo-1523567830207-96731740fa71"
                 )
-            ),
+            ).toInspirationItem(),
             UnsplashPhoto(
                 id = "2",
                 description = "Sample Photo 2",
@@ -143,7 +145,7 @@ fun BoardCardPreview() {
                     regular = "https://images.unsplash.com/photo-1581235720704-06d3acfcb611?w=400",
                     full = "https://images.unsplash.com/photo-1581235720704-06d3acfcb611"
                 )
-            )
+            ).toInspirationItem()
         )
         
         val sampleBoard = Board(
