@@ -8,9 +8,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.ynspo.data.model.InspirationItem
 import com.example.ynspo.data.model.UnsplashPhoto
 import com.example.ynspo.data.model.UnsplashPhotoUrls
-
+import com.example.ynspo.data.model.toInspirationItem
 import com.example.ynspo.ui.components.PinterestGrid
 import com.example.ynspo.ui.theme.YnspoTheme
 import com.example.ynspo.ui.theme.Dimens
@@ -35,9 +36,10 @@ fun HomeScreenPreview() {
                 
                 Spacer(modifier = Modifier.height(Dimens.PaddingL))
                 
+                val inspirationItems = samplePhotos.map { it.toInspirationItem() }
                 PinterestGrid(
-                    photos = samplePhotos,
-                    onPhotoClick = {},
+                    inspirationItems = inspirationItems,
+                    onItemClick = {},
                     modifier = Modifier.fillMaxSize()
                 )
             }
