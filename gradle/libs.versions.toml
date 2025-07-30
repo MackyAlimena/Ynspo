@@ -16,7 +16,9 @@ retrofit = "2.9.0"
 foundationLayoutAndroid = "1.6.1"
 media3Exoplayer = "1.6.1"
 foundationAndroid = "1.7.2"
-firebaseAuthKtx = "23.2.0"
+firebaseAuthKtx = "22.3.1"
+firebaseFirestoreKtx = "24.9.1"
+
 lifecycleLivedataKtx = "2.9.0"
 credentialsPlayServicesAuth = "1.5.0"
 datastorePreferences = "1.1.6"
@@ -57,6 +59,8 @@ androidx-foundation-android = { group = "androidx.compose.foundation", name = "f
 androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 google-firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
 firebase-auth-ktx = { module = "com.google.firebase:firebase-auth-ktx" }
+firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
+
 google-services-v432 = { module = "com.google.gms:google-services", version.ref = "googleServicesVersion" }
 androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "biometric" }
 androidx-credentials = { module = "androidx.credentials:credentials", version.ref = "credentialsPlayServicesAuth" }

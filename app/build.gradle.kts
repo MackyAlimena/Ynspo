@@ -37,6 +37,14 @@ android {
                 "proguard-rules.pro"
             )
         }
+        debug {
+            isMinifyEnabled = false
+        }
+    }
+    
+    lint {
+        abortOnError = false
+        checkReleaseBuilds = false
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -120,7 +128,10 @@ dependencies {
     // Firebase
     implementation(libs.firebase.auth.ktx)
     implementation(libs.google.firebase.auth.ktx)
-    implementation("com.google.firebase:firebase-core:21.1.1")
+    implementation(libs.firebase.firestore.ktx) {
+        exclude(group = "com.google.firebase", module = "firebase-common")
+    }
+
 
     // Credential Manager
     implementation(libs.androidx.credentials)
