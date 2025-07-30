@@ -13,17 +13,16 @@ import com.example.ynspo.ui.components.SharedViewModel
 import com.example.ynspo.ui.screen.home.components.HomeContent
 import com.example.ynspo.ui.screen.home.components.ModernHomeHeader
 import androidx.compose.material3.MaterialTheme
+import com.example.ynspo.data.model.InspirationItem
 
-/**
- * Main home screen of the application
- */
+
 @Composable
 fun HomeScreen(
     navController: NavController,
     viewModel: HomeViewModel = hiltViewModel(),
     sharedViewModel: SharedViewModel
 ) {
-    val photos by viewModel.photos.collectAsState()
+    val inspirationItems by viewModel.inspirationItems.collectAsState()
     val currentTab by viewModel.currentTab.collectAsState()
     val searchHistory by viewModel.searchHistory.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
@@ -45,8 +44,8 @@ fun HomeScreen(
             currentTab = currentTab,
             onTabChange = { tab -> 
                 viewModel.setCurrentTab(tab)
-                if (tab == HomeTab.EXPLORE && photos.isEmpty()) {
-                    // Si va a Explore y no hay fotos, hacer una búsqueda inicial
+                if (tab == HomeTab.EXPLORE && inspirationItems.isEmpty()) {
+                    // Si va a Explore y no hay items, hacer una búsqueda inicial
                     viewModel.search("inspiration")
                 }
             },
@@ -61,17 +60,17 @@ fun HomeScreen(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            if (isLoading && photos.isEmpty()) {
+            if (isLoading && inspirationItems.isEmpty()) {
                 CircularProgressIndicator(
                     color = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.padding(Dimens.PaddingXXL)
                 )
             } else {
                 HomeContent(
-                    photos = photos,
-                    onPhotoClick = { photo ->
-                        // Store the selected photo in the shared view model
-                        sharedViewModel.selectedPhoto = photo
+                    inspirationItems = inspirationItems,
+                    onItemClick = { item ->
+                        // Store the selected item in the shared view model
+                        sharedViewModel.selectedPhoto = item
                         // Navigate to the pin detail screen
                         navController.navigate("pinDetail")
                     }
