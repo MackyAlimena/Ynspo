@@ -9,11 +9,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.lifecycle.ViewModel
+import com.example.ynspo.data.model.UnsplashPhoto
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import java.util.Calendar
-import com.example.ynspo.data.model.UnsplashPhoto
+
 
 @HiltViewModel
 class ScheduleNotificationViewModel @Inject constructor(
@@ -37,18 +38,7 @@ class ScheduleNotificationViewModel @Inject constructor(
         }
     }
 
-    // Función sobrecargada que acepta UnsplashPhoto
-    @SuppressLint("ScheduleExactAlarm")
-    fun scheduleNotification(photo: UnsplashPhoto) {
-        val title = "💡 Inspiración creativa"
-        val message = "Recuerda revisar el pin '${photo.description ?: "sin descripción"}' que guardaste ayer"
-        
-        scheduleNotification(
-            delayInSeconds = 24 * 60 * 60, // 24 horas
-            title = title,
-            message = message
-        )
-    }
+
 
     @SuppressLint("ScheduleExactAlarm")
     fun scheduleNotification(
@@ -86,7 +76,7 @@ class ScheduleNotificationViewModel @Inject constructor(
         )
     }
     
-    // Método para programar una notificación diaria (por ejemplo, recordatorio)
+    // Método para programar una notificación diaria
     @SuppressLint("ScheduleExactAlarm")
     fun scheduleDaily(
         hourOfDay: Int,
