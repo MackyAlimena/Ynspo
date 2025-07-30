@@ -1,5 +1,6 @@
 package com.example.ynspo.ui.screen.pins
 
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -19,23 +20,42 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import android.content.Intent
+import com.example.ynspo.R
+import com.example.ynspo.data.model.InspirationItem
 import com.example.ynspo.data.model.UnsplashPhoto
+import com.example.ynspo.data.model.toInspirationItem
 import com.example.ynspo.notification.ScheduleNotificationViewModel
-import com.example.ynspo.ui.screen.boards.BoardsViewModel
 import com.example.ynspo.ui.components.dialog.SaveToBoardDialog
+import com.example.ynspo.ui.screen.boards.BoardsViewModel
 import com.example.ynspo.ui.theme.Dimens
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PinDetailScreen(
     photo: UnsplashPhoto,
+    navController: NavController,
+    boardsViewModel: BoardsViewModel = hiltViewModel(),
+    notificationViewModel: ScheduleNotificationViewModel = hiltViewModel(),
+    onNavigateBack: () -> Unit = { navController.popBackStack() }
+) {
+    // Convertir UnsplashPhoto a InspirationItem para usar la función genérica
+    val inspirationItem = photo.toInspirationItem()
+    PinDetailScreen(inspirationItem, navController, boardsViewModel, notificationViewModel, onNavigateBack)
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun PinDetailScreen(
+    inspirationItem: InspirationItem,
     navController: NavController,
     boardsViewModel: BoardsViewModel = hiltViewModel(),
     notificationViewModel: ScheduleNotificationViewModel = hiltViewModel(),
@@ -51,7 +71,7 @@ fun PinDetailScreen(
         val shareIntent = Intent().apply {
             action = Intent.ACTION_SEND
             type = "text/plain"
-            putExtra(Intent.EXTRA_TEXT, "¡Mira esta inspiración! ${photo.urls.regular}")
+            putExtra(Intent.EXTRA_TEXT, "¡Mira esta inspiración! ${inspirationItem.urls.regular}")
             putExtra(Intent.EXTRA_SUBJECT, "Inspiración desde Ynspo")
         }
         context.startActivity(Intent.createChooser(shareIntent, "Compartir inspiración"))
@@ -75,8 +95,8 @@ fun PinDetailScreen(
             ) {
                 // Imagen principal
                 AsyncImage(
-                    model = photo.urls.regular,
-                    contentDescription = photo.description,
+                    model = inspirationItem.urls.regular,
+                    contentDescription = inspirationItem.description,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxSize()
@@ -126,7 +146,7 @@ fun PinDetailScreen(
                 modifier = Modifier.padding(Dimens.PaddingL)
             ) {
                 // Descripción del pin
-                PinDescriptionSection(photo = photo)
+                PinDescriptionSection(inspirationItem = inspirationItem)
                 
                 Spacer(modifier = Modifier.height(Dimens.PaddingL))
                 
@@ -153,7 +173,7 @@ fun PinDetailScreen(
     // Save to board dialog
     if (showSaveToBoardDialog) {
         SaveToBoardDialog(
-            photo = photo,
+            inspirationItem = inspirationItem,
             boardsViewModel = boardsViewModel,
             onDismiss = { showSaveToBoardDialog = false }
         )
@@ -162,7 +182,7 @@ fun PinDetailScreen(
     // Reminder dialog
     if (showReminderDialog) {
         ModernReminderDialog(
-            photo = photo,
+            inspirationItem = inspirationItem,
             notificationViewModel = notificationViewModel,
             onDismiss = { showReminderDialog = false }
         )
@@ -172,6 +192,16 @@ fun PinDetailScreen(
 @Composable
 fun PinDescriptionSection(
     photo: UnsplashPhoto,
+    modifier: Modifier = Modifier
+) {
+    // Convertir UnsplashPhoto a InspirationItem para usar la función genérica
+    val inspirationItem = photo.toInspirationItem()
+    PinDescriptionSection(inspirationItem, modifier)
+}
+
+@Composable
+fun PinDescriptionSection(
+    inspirationItem: InspirationItem,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -190,10 +220,10 @@ fun PinDescriptionSection(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.padding(bottom = Dimens.PaddingS)
-            )
+                )
             
             Text(
-                text = photo.description ?: "Sin descripción disponible",
+                text = inspirationItem.description ?: "Sin descripción disponible",
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurface,
                 lineHeight = 24.sp
@@ -339,6 +369,17 @@ fun ModernReminderDialog(
     notificationViewModel: ScheduleNotificationViewModel,
     onDismiss: () -> Unit
 ) {
+    // Convertir UnsplashPhoto a InspirationItem para usar la función genérica
+    val inspirationItem = photo.toInspirationItem()
+    ModernReminderDialog(inspirationItem, notificationViewModel, onDismiss)
+}
+
+@Composable
+fun ModernReminderDialog(
+    inspirationItem: InspirationItem,
+    notificationViewModel: ScheduleNotificationViewModel,
+    onDismiss: () -> Unit
+) {
     AlertDialog(
         onDismissRequest = onDismiss,
         icon = {
@@ -385,7 +426,11 @@ fun ModernReminderDialog(
         confirmButton = {
             TextButton(
                 onClick = {
-                    notificationViewModel.scheduleNotification(photo)
+                    notificationViewModel.scheduleNotification(
+                        delayInSeconds = 86400, // 24 horas
+                        title = "Recordatorio de inspiración",
+                        message = "¡No olvides revisar tu inspiración!"
+                    )
                     onDismiss()
                 }
             ) {
