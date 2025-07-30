@@ -4,8 +4,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.ynspo.data.model.InspirationItem
 import com.example.ynspo.data.model.UnsplashPhoto
 import com.example.ynspo.data.model.UnsplashPhotoUrls
+import com.example.ynspo.data.model.toInspirationItem
 import com.example.ynspo.ui.components.PinterestGrid
 import com.example.ynspo.ui.theme.YnspoTheme
 import com.example.ynspo.ui.theme.Dimens
@@ -13,8 +15,8 @@ import com.example.ynspo.ui.theme.Dimens
 
 @Composable
 fun HomeContent(
-    photos: List<UnsplashPhoto>,
-    onPhotoClick: (UnsplashPhoto) -> Unit,
+    inspirationItems: List<InspirationItem>,
+    onItemClick: (InspirationItem) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -22,10 +24,10 @@ fun HomeContent(
             .fillMaxSize()
             .padding(horizontal = Dimens.PaddingS)
     ) {
-        // The Pinterest grid displays the photos in a staggered grid
+        // The Pinterest grid displays the inspiration items in a staggered grid
         PinterestGrid(
-            photos = photos,
-            onPhotoClick = onPhotoClick
+            inspirationItems = inspirationItems,
+            onItemClick = onItemClick
         )
     }
 }
@@ -57,8 +59,8 @@ fun HomeContentPreview() {
         )
         
         HomeContent(
-            photos = samplePhotos,
-            onPhotoClick = {}
+            inspirationItems = samplePhotos.map { it.toInspirationItem() },
+            onItemClick = {}
         )
     }
 }
