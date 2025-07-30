@@ -135,11 +135,57 @@ private fun AuthenticatedProfileContent(
     onSignOut: () -> Unit,
     themeViewModel: ThemeViewModel
 ) {
+    val authViewModel: com.example.ynspo.ui.components.AuthenticationCheckViewModel = hiltViewModel()
+    
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.fillMaxSize()
+    ) {
+        // Profile header
+        ProfileHeader(
+            userProfile = userProfile,
+            firebaseUser = firebaseUser,
+            persistedUser = persistedUser
+        )
+        
+        Spacer(modifier = Modifier.height(Dimens.PaddingXXL))
+        
+        // Theme toggle
+        ThemeToggleSection(themeViewModel = themeViewModel)
+        
+        Spacer(modifier = Modifier.height(Dimens.PaddingXXL))
+        
+        // Sign out buttons
+        Column(
+            verticalArrangement = Arrangement.spacedBy(Dimens.PaddingM)
+        ) {
+            OutlinedButton(
+                onClick = onSignOut,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Cerrar sesión de Google")
+            }
+            
+            OutlinedButton(
+                onClick = { authViewModel.clearAuthentication() },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Cerrar sesión biométrica")
+            }
+        }
+    }
+}
+
+@Composable
+private fun ProfileHeader(
+    userProfile: UserProfile?,
+    firebaseUser: com.google.firebase.auth.FirebaseUser?,
+    persistedUser: com.example.ynspo.data.db.entity.FirebaseUserEntity?
+) {
     // Usar datos de Firebase si está disponible, sino usar datos persistidos
     val displayName = firebaseUser?.displayName ?: persistedUser?.displayName ?: "Usuario"
     val photoUrl = firebaseUser?.photoUrl?.toString() ?: persistedUser?.photoUrl
     val email = firebaseUser?.email ?: persistedUser?.email
-    val isDarkMode by themeViewModel.isDarkMode
 
     userProfile?.let { profile ->
         Image(
@@ -208,79 +254,48 @@ private fun AuthenticatedProfileContent(
                 modifier = Modifier.padding(vertical = Dimens.PaddingXXS)
             )
         }
+    }
+}
 
-        Spacer(modifier = Modifier.height(Dimens.PaddingL))
-        
-        // Toggle Dark Mode
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surface
-            ),
-            elevation = CardDefaults.cardElevation(defaultElevation = Dimens.ElevationS)
+@Composable
+private fun ThemeToggleSection(themeViewModel: ThemeViewModel) {
+    val isDarkMode by themeViewModel.isDarkMode
+    
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = Dimens.ElevationS)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(Dimens.PaddingM),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(Dimens.PaddingM),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column {
-                    Text(
-                        text = "Modo Oscuro",
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        fontWeight = FontWeight.Medium
-                    )
-                    Text(
-                        text = if (isDarkMode) "Activado" else "Desactivado",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
-                    )
-                }
-                
-                Switch(
-                    checked = isDarkMode,
-                    onCheckedChange = { themeViewModel.toggleDarkMode() },
-                    colors = SwitchDefaults.colors(
-                        checkedThumbColor = MaterialTheme.colorScheme.primary,
-                        checkedTrackColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
-                    )
+            Column {
+                Text(
+                    text = "Modo Oscuro",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontWeight = FontWeight.Medium
+                )
+                Text(
+                    text = if (isDarkMode) "Activado" else "Desactivado",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
                 )
             }
-        }
-        
-        Spacer(modifier = Modifier.height(Dimens.PaddingL))
-        
-        // Botón de logout
-        OutlinedButton(
-            onClick = onSignOut,
-            colors = ButtonDefaults.outlinedButtonColors(
-                contentColor = MaterialTheme.colorScheme.error
-            ),
-            border = ButtonDefaults.outlinedButtonBorder.copy(
-                width = Dimens.StrokeWidthThin,
-                brush = androidx.compose.ui.graphics.SolidColor(MaterialTheme.colorScheme.error)
-            ),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Cerrar Sesión", fontWeight = FontWeight.Medium)
-        }
-    } ?: run {
-        // Mostrar mientras se carga el perfil
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxSize()
-        ) {
-            CircularProgressIndicator(
-                color = MaterialTheme.colorScheme.primary
-            )
-            Spacer(modifier = Modifier.height(Dimens.PaddingM))
-            Text(
-                text = "Cargando perfil...",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onBackground
+            
+            Switch(
+                checked = isDarkMode,
+                onCheckedChange = { themeViewModel.toggleDarkMode() },
+                colors = SwitchDefaults.colors(
+                    checkedThumbColor = MaterialTheme.colorScheme.primary,
+                    checkedTrackColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
+                )
             )
         }
     }
