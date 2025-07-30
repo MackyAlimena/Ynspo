@@ -1,16 +1,15 @@
 package com.example.ynspo.ui.screen.boards
 
 import android.content.Context
-import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ynspo.data.model.UnsplashPhoto
 import com.example.ynspo.data.model.Board
-import com.example.ynspo.data.repository.BoardsRepository
-import com.example.ynspo.notification.NotificationReceiver
+import com.example.ynspo.data.model.InspirationItem
+import com.example.ynspo.data.repository.BoardsMixedRepository
+import com.example.ynspo.data.repository.UserPinsRepository
 import com.example.ynspo.notification.ScheduleNotificationViewModel
-import com.example.ynspo.data.repository.BoardsRoomRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
@@ -18,47 +17,83 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BoardsViewModel @Inject constructor(
-    private val repository: BoardsRepository,
     @ApplicationContext private val context: Context,
-    private val roomRepository: BoardsRoomRepository
+    private val mixedRepository: BoardsMixedRepository,
+    private val userPinsRepository: UserPinsRepository
 ) : ViewModel() {
 
-    // Obtenemos los tableros desde el repositorio con Room
-    val boards: LiveData<List<Board>> = roomRepository.boards
+    // Obtenemos los tableros desde el repositorio mixto
+    val boards: LiveData<List<Board>> = mixedRepository.boards
 
-    // Función para añadir una foto a un tablero
+    // Función para añadir una foto a un tablero (legacy - solo Unsplash)
     fun addToBoard(boardId: Long, photo: UnsplashPhoto) {
         viewModelScope.launch {
-            roomRepository.addPhotoToBoard(boardId, photo)
+            mixedRepository.addPhotoToBoard(boardId, photo)
+        }
+    }
+
+    // Función para añadir un item de inspiración a un tablero (nuevo - ambos tipos)
+    fun addInspirationItemToBoard(boardId: Long, inspirationItem: InspirationItem) {
+        viewModelScope.launch {
+            mixedRepository.addInspirationItemToBoard(boardId, inspirationItem)
         }
     }
 
     // Función para crear un nuevo tablero
     fun createBoard(name: String) {
         viewModelScope.launch {
-            roomRepository.createBoard(name)
+            mixedRepository.createBoard(name)
         }
     }
 
     // Función para eliminar un tablero
     fun deleteBoard(board: Board) {
         viewModelScope.launch {
-            roomRepository.deleteBoard(board)
+            mixedRepository.deleteBoard(board)
         }
     }
 
     // Función para obtener un tablero por su ID
     suspend fun getBoardById(id: Int): Board? {
-        return roomRepository.getBoardById(id.toLong())
+        return mixedRepository.getBoardById(id.toLong())
     }
 
-    // Función para obtener las fotos de un tablero específico
+    // Función para obtener las fotos de un tablero específico (legacy - solo Unsplash)
     fun getBoardPhotos(boardId: Int): LiveData<List<UnsplashPhoto>> {
-        return roomRepository.getBoardPhotos(boardId.toLong())
+        return mixedRepository.getBoardPhotos(boardId.toLong())
     }
-    /**
-     * Envía una notificación cuando se guarda un pin en un tablero
-     */
+
+    // Función para obtener los items de inspiración de un tablero específico (nuevo - ambos tipos)
+    fun getBoardInspirationItems(boardId: Int): LiveData<List<InspirationItem>> {
+        return mixedRepository.getBoardInspirationItems(boardId.toLong())
+    }
+
+    // Función para obtener boards con photos cargados
+    suspend fun getBoardsWithPhotos(): List<Board> {
+        return mixedRepository.getBoardsWithPhotos()
+    }
+
+    // Función para borrar un item de inspiración de un tablero
+    fun removeInspirationItemFromBoard(boardId: Long, itemId: String, itemType: String) {
+        viewModelScope.launch {
+            mixedRepository.removeInspirationItemFromBoard(boardId, itemId, itemType)
+        }
+    }
+
+    // Función para borrar todos los UserPins (tanto de Room como de Firestore)
+    fun deleteAllUserPins() {
+        viewModelScope.launch {
+            val result = userPinsRepository.deleteAllUserPins()
+            if (result.isSuccess) {
+                android.util.Log.d("BoardsViewModel", "✅ Todos los UserPins borrados exitosamente")
+            } else {
+                android.util.Log.e("BoardsViewModel", "❌ Error borrando UserPins: ${result.exceptionOrNull()?.message}")
+            }
+        }
+    }
+
+
+    //Envía una notificación cuando se guarda un pin en un tablero
     fun sendSavedPinNotification(boardName: String, photoDescription: String) {
         val notificationViewModel = ScheduleNotificationViewModel(context)
 

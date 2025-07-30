@@ -7,9 +7,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
@@ -20,14 +22,30 @@ import coil.compose.AsyncImage
 import com.example.ynspo.ui.screen.boards.BoardsViewModel
 import com.example.ynspo.ui.theme.Dimens
 import com.example.ynspo.ui.components.dialog.CreateBoardDialog
+import com.example.ynspo.security.AuthManager
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+
+@HiltViewModel
+class BoardsScreenViewModel @Inject constructor(
+    val authManager: AuthManager
+) : androidx.lifecycle.ViewModel()
 
 @Composable
 fun BoardsScreen(
     navController: NavController,
-    boardsViewModel: BoardsViewModel = hiltViewModel()
+    boardsViewModel: BoardsViewModel = hiltViewModel(),
+    boardsScreenViewModel: BoardsScreenViewModel = hiltViewModel()
 ) {
     val boards = boardsViewModel.boards.observeAsState(emptyList())
-    var showCreateDialog by remember { mutableStateOf(false) }
+    var boardsWithPhotos by remember { mutableStateOf<List<com.example.ynspo.data.model.Board>>(emptyList()) }
+    
+    // Cargar boards con photos cuando cambian los boards
+    LaunchedEffect(boards.value) {
+        kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+            boardsWithPhotos = boardsViewModel.getBoardsWithPhotos()
+        }
+    }
 
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -36,16 +54,40 @@ fun BoardsScreen(
                 .background(MaterialTheme.colorScheme.background)
                 .padding(Dimens.PaddingL)
         ) {
-            // Header
-            Text(
-                text = "Tus Boards",
-                style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.padding(bottom = Dimens.PaddingL)
-            )
+            // Header con botón de logout
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Tus Boards",
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+                
+                // Botón de logout para probar la autenticación
+                IconButton(
+                    onClick = {
+                        boardsScreenViewModel.authManager.clearAuthentication()
+                        // Navegar de vuelta a home para forzar la re-autenticación
+                        navController.navigate("home") {
+                            popUpTo(0) { inclusive = true }
+                        }
+                    }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.ExitToApp,
+                        contentDescription = "Cerrar sesión",
+                        tint = MaterialTheme.colorScheme.onBackground
+                    )
+                }
+            }
             
-            if (boards.value.isEmpty()) {
+            Spacer(modifier = Modifier.height(Dimens.PaddingL))
+            
+            if (boardsWithPhotos.isEmpty()) {
                 // Estado vacío
                 Box(
                     modifier = Modifier.fillMaxSize(),
@@ -70,7 +112,7 @@ fun BoardsScreen(
             } else {
                 // Lista de boards
                 LazyColumn(verticalArrangement = Arrangement.spacedBy(Dimens.PaddingL)) {
-                    items(boards.value) { board ->
+                    items(boardsWithPhotos) { board ->
                         Card(
                             colors = CardDefaults.cardColors(
                                 containerColor = MaterialTheme.colorScheme.surface
@@ -110,30 +152,5 @@ fun BoardsScreen(
                 }
             }
         }
-        
-        // Floating Action Button
-        FloatingActionButton(
-            onClick = { showCreateDialog = true },
-            modifier = Modifier
-                .align(androidx.compose.ui.Alignment.BottomEnd)
-                .padding(Dimens.PaddingL),
-            containerColor = MaterialTheme.colorScheme.primary,
-            contentColor = MaterialTheme.colorScheme.onPrimary
-        ) {
-            Icon(
-                imageVector = Icons.Default.Add,
-                contentDescription = "Crear board"
-            )
-        }
-    }
-    
-    // Dialog para crear board
-    if (showCreateDialog) {
-        CreateBoardDialog(
-            onDismiss = { showCreateDialog = false },
-            onCreateBoard = { name ->
-                boardsViewModel.createBoard(name)
-            }
-        )
     }
 }
