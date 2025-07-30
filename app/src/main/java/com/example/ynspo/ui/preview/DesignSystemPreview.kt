@@ -12,13 +12,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.ynspo.data.model.Board
+import com.example.ynspo.data.model.InspirationItem
 import com.example.ynspo.data.model.UnsplashPhoto
 import com.example.ynspo.data.model.UnsplashPhotoUrls
-import com.example.ynspo.data.model.Board
+import com.example.ynspo.data.model.toInspirationItem
 import com.example.ynspo.ui.profile.UserProfile
-import com.example.ynspo.ui.theme.BackgroundColor
-import com.example.ynspo.ui.theme.DetailColor
-import com.example.ynspo.ui.theme.SelectedColor
+
 import com.example.ynspo.ui.theme.YnspoTheme
 import com.example.ynspo.ui.theme.Dimens
 
@@ -65,17 +65,17 @@ val previewBoards = listOf(
     Board(
         id = 1,
         name = "Handmade Decor",
-        photos = previewPhotos.take(2).toMutableList()
+        photos = previewPhotos.take(2).map { it.toInspirationItem() }.toMutableList()
     ),
     Board(
         id = 2,
         name = "Knitting Ideas",
-        photos = previewPhotos.takeLast(2).toMutableList()
+        photos = previewPhotos.takeLast(2).map { it.toInspirationItem() }.toMutableList()
     ),
     Board(
         id = 3,
         name = "Summer Vibes",
-        photos = previewPhotos.toMutableList()
+        photos = previewPhotos.map { it.toInspirationItem() }.toMutableList()
     )
 )
 
