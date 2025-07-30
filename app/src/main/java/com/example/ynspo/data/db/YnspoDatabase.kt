@@ -9,36 +9,40 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import com.example.ynspo.data.db.dao.BoardDao
-import com.example.ynspo.data.db.dao.BoardPhotoDao
 import com.example.ynspo.data.db.dao.PhotoDao
 import com.example.ynspo.data.db.dao.UserProfileDao
 import com.example.ynspo.data.db.dao.FirebaseUserDao
+import com.example.ynspo.data.db.dao.UserPinDao
+import com.example.ynspo.data.db.dao.BoardItemDao
 import com.example.ynspo.data.db.entity.BoardEntity
-import com.example.ynspo.data.db.entity.BoardPhotosCrossRef
 import com.example.ynspo.data.db.entity.PhotoEntity
 import com.example.ynspo.data.db.entity.UserHobbyEntity
 import com.example.ynspo.data.db.entity.UserProfileEntity
 import com.example.ynspo.data.db.entity.FirebaseUserEntity
+import com.example.ynspo.data.db.entity.UserPinEntity
+import com.example.ynspo.data.db.entity.BoardItemEntity
 
 @Database(
     entities = [
         BoardEntity::class,
         PhotoEntity::class,
-        BoardPhotosCrossRef::class,
         UserProfileEntity::class,
         UserHobbyEntity::class,
-        FirebaseUserEntity::class
+        FirebaseUserEntity::class,
+        UserPinEntity::class,
+        BoardItemEntity::class
     ],
-    version = 3,
+    version = 8,
     exportSchema = false
 )
 abstract class YnspoDatabase : RoomDatabase() {
 
     abstract fun boardDao(): BoardDao
     abstract fun photoDao(): PhotoDao
-    abstract fun boardPhotoDao(): BoardPhotoDao
     abstract fun userProfileDao(): UserProfileDao
     abstract fun firebaseUserDao(): FirebaseUserDao
+    abstract fun userPinDao(): UserPinDao
+    abstract fun boardItemDao(): BoardItemDao
 
     companion object {
         @Volatile
