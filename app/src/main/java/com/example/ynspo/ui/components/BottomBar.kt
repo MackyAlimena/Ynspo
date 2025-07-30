@@ -5,6 +5,7 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -44,6 +45,19 @@ fun BottomBar(navController: NavController) {
             label = { Text(stringResource(R.string.boards_label)) },
             selected = currentDestination == "boards" || currentDestination == "boards_content" || currentDestination?.startsWith("boardDetail") == true,
             onClick = { navController.navigate("boards") },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = MaterialTheme.colorScheme.background,
+                selectedTextColor = MaterialTheme.colorScheme.background,
+                unselectedIconColor = MaterialTheme.colorScheme.background.copy(alpha = 0.6f),
+                unselectedTextColor = MaterialTheme.colorScheme.background.copy(alpha = 0.6f),
+                indicatorColor = MaterialTheme.colorScheme.background.copy(alpha = 0.2f)
+            )
+        )
+        NavigationBarItem(
+            icon = { Icon(Icons.Default.Add, contentDescription = null) },
+            label = { Text(stringResource(R.string.upload_label)) },
+            selected = currentDestination == "uploadPin",
+            onClick = { navController.navigate("uploadPin") },
             colors = NavigationBarItemDefaults.colors(
                 selectedIconColor = MaterialTheme.colorScheme.background,
                 selectedTextColor = MaterialTheme.colorScheme.background,
