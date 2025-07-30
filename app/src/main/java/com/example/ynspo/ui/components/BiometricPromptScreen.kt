@@ -20,8 +20,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BiometricAuthViewModel @Inject constructor(
-    val biometricAuthManager: BiometricAuthManager
-) : ViewModel()
+    val biometricAuthManager: BiometricAuthManager,
+    val authManager: com.example.ynspo.security.AuthManager
+) : ViewModel() {
+    
+    fun setAuthenticated() {
+        authManager.setAuthenticated()
+    }
+}
 
 @Composable
 fun BiometricPromptScreen(
@@ -40,7 +46,11 @@ fun BiometricPromptScreen(
             hasStartedAuth = true
             viewModel.biometricAuthManager.authenticate(
                 context = context,
-                onSuccess = onAuthenticationSuccess,
+                onSuccess = {
+                    // Marcar como autenticado
+                    viewModel.setAuthenticated()
+                    onAuthenticationSuccess()
+                },
                 onError = { error ->
                     showError = error
                     onAuthenticationError(error)
@@ -114,7 +124,11 @@ fun BiometricPromptScreen(
                     showError = null
                     viewModel.biometricAuthManager.authenticate(
                         context = context,
-                        onSuccess = onAuthenticationSuccess,
+                        onSuccess = {
+                            // Marcar como autenticado
+                            viewModel.setAuthenticated()
+                            onAuthenticationSuccess()
+                        },
                         onError = { error ->
                             showError = error
                             onAuthenticationError(error)
