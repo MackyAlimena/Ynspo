@@ -11,6 +11,7 @@ import com.example.ynspo.ui.screen.boards.BoardsViewModel
 import com.example.ynspo.user.UserViewModel
 import com.google.firebase.auth.FirebaseAuth
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 fun AuthenticatedSaveToBoardDialog(
     photo: UnsplashPhoto,
@@ -18,7 +19,7 @@ fun AuthenticatedSaveToBoardDialog(
     onDismiss: () -> Unit,
     userViewModel: UserViewModel = hiltViewModel()
 ) {
-    val userData by userViewModel.userData.collectAsState()
+    val userData by userViewModel.userData.collectAsStateWithLifecycle()
     var showLoginDialog by remember { mutableStateOf(false) }
     
     // Verificar si el usuario está autenticado
